@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:fontFamily="@font/signatra"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="163dp"
+        android:text="Menu Activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonMap"
+                android:fontFamily="@font/signatra"
+                android:textSize="30dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:onClick="buttonClicked"
+                android:text="Map"
+                tools:layout_editor_absoluteX="116dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <Button
+                android:id="@+id/buttonCreate_Memory"
+                android:fontFamily="@font/signatra"
+                android:textSize="30dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:onClick="buttonClicked"
+                android:text="Create Memory"
+                tools:layout_editor_absoluteX="106dp"
+                tools:layout_editor_absoluteY="202dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonSettings"
+                android:fontFamily="@font/signatra"
+                android:textSize="30dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:onClick="buttonClicked"
+                android:text="Settings"
+                tools:layout_editor_absoluteX="204dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <Button
+                android:id="@+id/buttonCollections"
+                android:fontFamily="@font/signatra"
+                android:textSize="30dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:onClick="buttonClicked"
+                android:text="Collections"
+                tools:layout_editor_absoluteX="90dp"
+                tools:layout_editor_absoluteY="80dp" />
+        </TableRow>
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>
