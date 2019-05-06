@@ -2,4 +2,6 @@
     <string name="app_name">Project-B</string>
     <string name="toolbar_label">Test</string>
     <string name="title_activity_map">Map</string>
+    <string name="open_collections">Open Collections</string>
+    <string name="write_something">Write something...</string>
 </resources>
