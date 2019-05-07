@@ -48,7 +48,7 @@
         android:layout_below="@id/editText"
         android:layout_toEndOf="@id/btnAdd"
         android:fontFamily="@font/signatra"
-        android:text="@string/open_collections"
+        android:text="@string/collections"
         android:textSize="25sp"/>
 
 </RelativeLayout>

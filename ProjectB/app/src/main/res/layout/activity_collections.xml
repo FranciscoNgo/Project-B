@@ -13,14 +13,13 @@
     <Button
         android:id="@+id/buttonMemory_Displayer"
         android:fontFamily="@font/signatra"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:onClick="buttonClicked"
-        android:text="Memory Displayer" />
+        android:text="@string/memory_displayer" />
 
     <ListView
         android:id="@+id/ListView"
