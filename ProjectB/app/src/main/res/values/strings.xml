@@ -4,4 +4,10 @@
     <string name="title_activity_map">Map</string>
     <string name="open_collections">Open Collections</string>
     <string name="write_something">Write something...</string>
+    <string name="pick_location">Pick Location</string>
+    <string name="add">add</string>
+    <string name="memory_displayer">Memory Displayer</string>
+    <string name="collections">Collections</string>
+    <string name="edit_memory">Edit Memory</string>
+    <string name="filter_and_sort">Filter and Sort</string>
 </resources>
