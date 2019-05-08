@@ -1,16 +1,18 @@
 package com.example.project_b;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -19,11 +21,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    DatabaseHelper myDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        myDB = new DatabaseHelper(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,10 +41,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         toolbar_text.setText("Map");
 
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
+
 
     }
 
@@ -57,9 +66,24 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Rotterdam and move the camera
-        LatLng rotterdam = new LatLng(51.9334597, 4.3468513);
-        mMap.addMarker(new MarkerOptions().position(rotterdam).title("Marker in Rotterdam"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(rotterdam));
+        //LatLng rotterdam = new LatLng(51.9334597, 4.3468513);
+        //mMap.addMarker(new MarkerOptions().position(rotterdam).title("Marker in Rotterdam"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(rotterdam));
+
+        //Display markers
+        Cursor dataLocation = myDB.getLocations();
+
+        while(dataLocation.moveToNext()) {
+            String title = dataLocation.getString(1);
+            double latitude = dataLocation.getDouble(3);
+            double longitude = dataLocation.getDouble(4);
+            LatLng latLng = new LatLng(latitude, longitude);
+
+            Log.i("Calling", title + " "+ latitude + " " + longitude);
+
+            mMap.addMarker(new MarkerOptions().position(latLng).title(title));
+        }
+
     }
 
 

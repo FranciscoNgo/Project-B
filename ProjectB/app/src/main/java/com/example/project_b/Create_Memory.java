@@ -1,28 +1,48 @@
 package com.example.project_b;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.Marker;
+
 public class Create_Memory extends AppCompatActivity {
+
+    public static Marker marker;
 
     DatabaseHelper myDB;
     Button btnAdd,btnView;
     EditText editText;
+
+    Button btnpic;
+    ImageView imgTakenPic;
+    private static final int CAM_REQUEST=1313;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create__memory);
 
+        marker = null;
+
         myDB = new DatabaseHelper(this);
+
+        // picture items
+        btnpic = (Button) findViewById(R.id.button);
+        imgTakenPic = (ImageView)findViewById(R.id.imageView);
+        btnpic.setOnClickListener(new btnTakePhotoClicker());
+
 
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
@@ -42,7 +62,6 @@ public class Create_Memory extends AppCompatActivity {
                 String newEntry = editText.getText().toString();
                 if (editText.length() != 0){
                     AddData(newEntry);
-                    editText.setText("");
                 }
                 else {
                     Toast.makeText(Create_Memory.this, "You must put something in the text field!",Toast.LENGTH_LONG).show();
@@ -60,6 +79,26 @@ public class Create_Memory extends AppCompatActivity {
 
         toolbar_text.setText("Create Memory");
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CAM_REQUEST){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            imgTakenPic.setImageBitmap(bitmap);
+        }
+    }
+
+    class btnTakePhotoClicker implements  Button.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent,CAM_REQUEST);
+        }
+    }
+
 
     public void HomeClicked(View v) {
         if (v.getId() == R.id.buttonHome) {
@@ -92,13 +131,28 @@ public class Create_Memory extends AppCompatActivity {
     }
 
     public void AddData(String newEntry) {
-        boolean insertData = myDB.addData(newEntry);
+        if(marker != null) {
 
-        if(insertData == true){
-            Toast.makeText(Create_Memory.this, "Successfully Entered Data!",Toast.LENGTH_LONG).show();
+            int ID = myDB.addMemory(newEntry);
+
+            if (ID == -1) {
+                Toast.makeText(this, "Something went wrong :(.", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                myDB.addLocation(marker.getPosition().latitude, marker.getPosition().longitude, ID);
+
+                Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
+
+                editText.setText("");
+                Toast.makeText(this, "Successfully Entered Data!", Toast.LENGTH_LONG).show();
+
+
+            }
         }
-        else{
-            Toast.makeText(Create_Memory.this, "Something went wrong :(.",Toast.LENGTH_LONG).show();
+
+        else {
+            Toast.makeText(Create_Memory.this, "Choose a location first.", Toast.LENGTH_LONG).show();
         }
     }
 

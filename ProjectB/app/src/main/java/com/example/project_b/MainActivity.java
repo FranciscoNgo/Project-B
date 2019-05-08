@@ -5,18 +5,24 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
+    DatabaseHelper myDB;
+    ImageButton buttonHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        buttonHome = findViewById(R.id.buttonHome);
+        buttonHome.setVisibility(View.INVISIBLE);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -24,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         final TextView toolbar_text = findViewById(R.id.toolbar_text);
 
         toolbar_text.setText("Home");
+
+        myDB = new DatabaseHelper(this);
+
+        //Reset database
+        //myDB.restartDatabase();
 
     }
 

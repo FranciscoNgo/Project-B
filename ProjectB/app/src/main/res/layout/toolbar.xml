@@ -26,17 +26,18 @@
 
 
         <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/buttonHome"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:adjustViewBounds="true"
             android:background="@color/colorToolbarButton"
+            android:onClick="HomeClicked"
             android:padding="10dp"
             android:scaleType="fitCenter"
-            android:id="@+id/buttonHome"
-            android:onClick="HomeClicked"
             android:src="@drawable/home_icon"
+            android:visibility="visible"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.Toolbar>
