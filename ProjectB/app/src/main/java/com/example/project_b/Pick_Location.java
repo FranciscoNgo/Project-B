@@ -31,6 +31,8 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
     public static Marker latest = null;
     public static Boolean buttonVisible;
 
+    private int LOCATION_PERMISSION_CODE = 1;
+
     Button confirm;
 
     private GoogleMap mMap;
@@ -85,6 +87,9 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // request for permission
             Log.i("Test", "Request for permission");
+
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+
         } else {
             Log.i("Test", "Already have permission");
             // already permission granted
