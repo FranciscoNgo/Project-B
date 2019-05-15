@@ -84,7 +84,7 @@ public class Create_Memory extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == CAM_REQUEST){
+        if(requestCode == CAM_REQUEST && data != null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgTakenPic.setImageBitmap(bitmap);
         }
