@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 public class Create_Memory extends AppCompatActivity {
 
     public static Marker marker;
+    public static String picturePath = null;
 
     DatabaseHelper myDB;
     Button btnAdd,btnView;
@@ -49,7 +50,7 @@ public class Create_Memory extends AppCompatActivity {
 
         // picture items
         btnpic = (Button) findViewById(R.id.button);
-        imgTakenPic = (ImageView)findViewById(R.id.imageView);
+        imgTakenPic = (ImageView)findViewById(R.id.rpick);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
 
 
@@ -97,7 +98,8 @@ public class Create_Memory extends AppCompatActivity {
         if(requestCode == CAM_REQUEST && data != null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgTakenPic.setImageBitmap(bitmap);
-
+            picturePath = saveToInternalStorage(bitmap);
+            loadImageFromStorage(picturePath);
         }
     }
 
@@ -107,7 +109,6 @@ public class Create_Memory extends AppCompatActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent,CAM_REQUEST);
-
         }
     }
 
@@ -154,11 +155,18 @@ public class Create_Memory extends AppCompatActivity {
 
                 myDB.addLocation(marker.getPosition().latitude, marker.getPosition().longitude, ID);
 
-                Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
+                Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude + " " + picturePath);
+
+                if (picturePath != null) {
+                    myDB.addPicture(picturePath, ID);
+
+                    Log.i("Adding", picturePath);
+                }
 
                 editText.setText("");
                 Toast.makeText(this, "Successfully Entered Data!", Toast.LENGTH_LONG).show();
 
+                this.finish();
             }
         }
 
@@ -173,16 +181,13 @@ public class Create_Memory extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "This is Pick Location", Toast.LENGTH_SHORT).show();
     }
 
-    // Methode om een bitmap te op te slaan in INTERNAL storage.
-    // De methode returned de PATH die kan gebruikt worden om op te slaan in de Database of in loadImageFromStorage(String path)
-    // Groetjes Steffan :)
-/*
+
     private String saveToInternalStorage(Bitmap bitmapImage){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
+        File mypath = new File(directory,"profile.jpg");
 
 
         FileOutputStream fos = null;
@@ -201,18 +206,18 @@ public class Create_Memory extends AppCompatActivity {
         }
         return directory.getAbsolutePath();
 
-    } */
+    }
 
  //Methode om een image te te loaden uit de internal storage.
     // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
-/*
+
     private void loadImageFromStorage(String path)
     {
 
         try {
             File f=new File(path, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img=(ImageView)findViewById(R.id.rpick);
+            ImageView img = findViewById(R.id.rpick);
             img.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
@@ -221,6 +226,6 @@ public class Create_Memory extends AppCompatActivity {
         }
 
     }
-    */
+
 
 }
