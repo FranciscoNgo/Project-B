@@ -11,6 +11,21 @@
         layout="@layout/toolbar"/>
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:fontFamily="@font/signatra"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="163dp"
+        android:text="Menu Activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +43,7 @@
             <Button
                 android:id="@+id/buttonMap"
                 android:fontFamily="@font/signatra"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:onClick="buttonClicked"
@@ -39,7 +54,7 @@
             <Button
                 android:id="@+id/buttonCreate_Memory"
                 android:fontFamily="@font/signatra"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:onClick="buttonClicked"
@@ -56,7 +71,7 @@
             <Button
                 android:id="@+id/buttonSettings"
                 android:fontFamily="@font/signatra"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:onClick="buttonClicked"
@@ -67,7 +82,7 @@
             <Button
                 android:id="@+id/buttonCollections"
                 android:fontFamily="@font/signatra"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:onClick="buttonClicked"
