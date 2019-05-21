@@ -12,24 +12,28 @@
 
     <Button
         android:id="@+id/buttonEdit_Memory"
-        android:fontFamily="@font/signatra"
-        android:textSize="25sp"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_below="@+id/buttonMemory_Filter_Sorter"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="@font/signatra"
         android:onClick="buttonClicked"
-        android:text="@string/edit_memory"/>
+        android:text="@string/edit_memory"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/buttonMemory_Filter_Sorter"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/signatra"
-        android:textSize="25sp"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentEnd="true"
         android:onClick="buttonClicked"
-        android:text="@string/filter_and_sort"/>
+        android:text="@string/filter_and_sort"
+        android:textSize="25sp" />
 
 </RelativeLayout>
