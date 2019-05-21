@@ -1,7 +1,9 @@
 package com.example.project_b;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 import com.google.android.gms.maps.model.Marker;
 
@@ -47,6 +56,7 @@ public class Create_Memory extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnView = (Button) findViewById(R.id.btnView);
+
 
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +97,7 @@ public class Create_Memory extends AppCompatActivity {
         if(requestCode == CAM_REQUEST && data != null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgTakenPic.setImageBitmap(bitmap);
+
         }
     }
 
@@ -96,6 +107,7 @@ public class Create_Memory extends AppCompatActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent,CAM_REQUEST);
+
         }
     }
 
@@ -147,7 +159,6 @@ public class Create_Memory extends AppCompatActivity {
                 editText.setText("");
                 Toast.makeText(this, "Successfully Entered Data!", Toast.LENGTH_LONG).show();
 
-
             }
         }
 
@@ -161,5 +172,55 @@ public class Create_Memory extends AppCompatActivity {
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "This is Pick Location", Toast.LENGTH_SHORT).show();
     }
+
+    // Methode om een bitmap te op te slaan in INTERNAL storage.
+    // De methode returned de PATH die kan gebruikt worden om op te slaan in de Database of in loadImageFromStorage(String path)
+    // Groetjes Steffan :)
+/*
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+
+    } */
+
+ //Methode om een image te te loaden uit de internal storage.
+    // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
+/*
+    private void loadImageFromStorage(String path)
+    {
+
+        try {
+            File f=new File(path, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            ImageView img=(ImageView)findViewById(R.id.rpick);
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+    */
 
 }
