@@ -1,5 +1,6 @@
 package com.example.project_b;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,7 +30,9 @@ public class Collections extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
 
         ArrayList<String> theList = new ArrayList<>();
+
         Cursor data = myDB.getListContents();
+
 
         if(data.getCount() == 0){
             Toast.makeText(Collections.this, "The Database was empty :(.",Toast.LENGTH_LONG).show();
@@ -38,9 +42,19 @@ public class Collections extends AppCompatActivity {
                 theList.add(data.getString(1));
                 ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
                 listView.setAdapter(listAdapter);
-            }
 
+            }
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Collections.this, Memory_Page.class);
+
+                startActivity(intent);
+            }
+        });
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +65,9 @@ public class Collections extends AppCompatActivity {
         final TextView toolbar_text = findViewById(R.id.toolbar_text);
 
         toolbar_text.setText("Collections");
+
+
+
 
     }
 
@@ -77,6 +94,8 @@ public class Collections extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public void buttonClicked(View v) {
 
         if (v.getId() == R.id.buttonMemory_Displayer) {
@@ -89,4 +108,9 @@ public class Collections extends AppCompatActivity {
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "This is Memory Displayer", Toast.LENGTH_SHORT).show();
     }
+
+
+
+
+
 }
