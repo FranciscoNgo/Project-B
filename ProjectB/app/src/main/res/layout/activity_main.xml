@@ -27,7 +27,7 @@
 
             <Button
                 android:id="@+id/buttonMap"
-                android:fontFamily="@font/hinami"
+                android:fontFamily="@font/coffeetea"
                 android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -38,7 +38,7 @@
 
             <Button
                 android:id="@+id/buttonCreate_Memory"
-                android:fontFamily="@font/hinami"
+                android:fontFamily="@font/coffeetea"
                 android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -55,7 +55,7 @@
 
             <Button
                 android:id="@+id/buttonSettings"
-                android:fontFamily="@font/hinami"
+                android:fontFamily="@font/coffeetea"
                 android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -66,7 +66,7 @@
 
             <Button
                 android:id="@+id/buttonCollections"
-                android:fontFamily="@font/hinami"
+                android:fontFamily="@font/coffeetea"
                 android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
