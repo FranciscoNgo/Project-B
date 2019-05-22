@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Maps"></activity>
+        <activity android:name=".Memory_Page"></activity>
+        <activity android:name=".Maps" />
         <activity android:name=".Settings" />
         <activity android:name=".Pick_Location" />
         <activity android:name=".Memory_Filter_Sorter" />
