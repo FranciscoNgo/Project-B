@@ -4,5 +4,8 @@
     <font
         android:font="@font/signatra"
         android:fontStyle="normal"/>
+    <font
+        android:font="@font/hinami"
+        android:fontStyle="normal"/>
 
 </font-family>

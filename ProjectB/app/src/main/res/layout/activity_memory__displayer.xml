@@ -18,7 +18,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="0dp"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:onClick="buttonClicked"
         android:text="@string/edit_memory"
         android:textSize="25sp" />
@@ -31,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="56dp"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:onClick="buttonClicked"
         android:text="@string/filter_and_sort"
         android:textSize="25sp" />

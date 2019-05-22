@@ -20,7 +20,7 @@
         android:id="@+id/buttonPick_LocationConfirm"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:onClick="ConfirmClicked"
         android:text="Confirm"
         android:textAlignment="center"

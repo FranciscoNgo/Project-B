@@ -17,7 +17,7 @@
 
     <Button
         android:id="@+id/buttonMap_Filter"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -17,7 +17,7 @@
             android:id="@+id/toolbar_text"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
-            android:fontFamily="@font/signatra"
+            android:fontFamily="@font/hinami"
             android:text="@string/toolbar_label"
             android:textSize="30dp"
             android:textColor="@color/colorToolbarText"

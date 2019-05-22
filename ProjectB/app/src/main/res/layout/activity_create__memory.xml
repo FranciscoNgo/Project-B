@@ -18,7 +18,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="0dp"
         android:autofillHints=""
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:hint="@string/write_something"
         android:inputType=""
         android:textSize="25sp" />
@@ -29,7 +29,7 @@
         android:layout_height="122dp"
         android:layout_below="@+id/editText"
         android:layout_marginTop="188dp"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:onClick="buttonClicked"
         android:text="@string/pick_location"
         android:textSize="24sp" />
@@ -42,7 +42,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="340dp"
         android:layout_toEndOf="@id/buttonPick_Location"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:text="@string/add"
         android:textSize="24sp" />
 
@@ -54,7 +54,7 @@
         android:layout_marginStart="-8dp"
         android:layout_marginTop="187dp"
         android:layout_toEndOf="@id/btnAdd"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:text="@string/collections"
         android:textSize="24sp" />
 
@@ -65,7 +65,7 @@
         android:layout_alignTop="@id/btnAdd"
         android:layout_marginLeft="133dp"
         android:layout_marginTop="-153dp"
-        android:fontFamily="@font/signatra"
+        android:fontFamily="@font/hinami"
         android:text="Make picture"
         android:textSize="24sp" />
 
