@@ -95,5 +95,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getIDbyName(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + MEMORIES_COL1 + " FROM " + MEMORIES_TABLE_NAME +
+                " WHERE " + MEMORIES_COL2 + " = '" + name + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 
 }
