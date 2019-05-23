@@ -179,7 +179,17 @@ public class Create_Memory extends AppCompatActivity {
 
     public void openPick_Location() {
         Intent intent = new Intent(this, Pick_Location.class);
+
+        intent.putExtra("activity", "Create Memory");
+
+        if (marker != null) {
+            intent.putExtra("latitude", marker.getPosition().latitude);
+            intent.putExtra("longitude", marker.getPosition().longitude);
+
+        }
+
         startActivity(intent);
+
         Toast.makeText(getApplicationContext(), "This is Pick Location", Toast.LENGTH_SHORT).show();
     }
 

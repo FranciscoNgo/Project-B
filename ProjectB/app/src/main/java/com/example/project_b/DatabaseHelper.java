@@ -108,32 +108,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor getIDbyName(String name){
+    public Cursor getMemory(int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + MEMORIES_COL1 + " FROM " + MEMORIES_TABLE_NAME +
-                " WHERE " + MEMORIES_COL2 + " = '" + name + "'";
-        Cursor data = db.rawQuery(query, null);
+        Cursor data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m, " + LOCATIONS_TABLE_NAME + " AS l, " + PICTURES_TABLE_NAME + " AS p " +
+                " WHERE " + "m." + MEMORIES_COL1 + " = l." + LOCATIONS_COL1 + " AND m." + MEMORIES_COL1 + " = p." + PICTURES_COL1 +
+                " AND m." + MEMORIES_COL1 + " = " + ID, null);
+
         return data;
-    }
-
-    public String getPathbyID(int ID){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + PICTURES_COL2 + " FROM " + PICTURES_TABLE_NAME +
-                " WHERE " + PICTURES_COL1 + " = '" + ID + "'";
-        Cursor data = db.rawQuery(query, null);
-        data.moveToFirst();
-        String value = data.getString(0);
-        return value;
-    }
-
-    public String getFilenamebyID(int ID){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + PICTURES_COL3 + " FROM " + PICTURES_TABLE_NAME +
-                " WHERE " + PICTURES_COL1 + " = '" + ID + "'";
-        Cursor data = db.rawQuery(query, null);
-        data.moveToFirst();
-        String value = data.getString(0);
-        return value;
     }
 
 

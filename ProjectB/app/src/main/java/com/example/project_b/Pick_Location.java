@@ -31,6 +31,8 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
     public static Marker latest = null;
     public static Boolean buttonVisible;
 
+    public static String activity;
+
     private int LOCATION_PERMISSION_CODE = 1;
 
     Button confirm;
@@ -41,6 +43,8 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick__location);
+
+        activity = getIntent().getStringExtra("activity");
 
         buttonVisible = false;
 
@@ -95,7 +99,11 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
             // already permission granted
         }
 
-        if(Create_Memory.marker == null) {
+        Log.i("Previous Activity", activity);
+
+        if(Create_Memory.marker == null && activity.equals("Create Memory")) {
+
+            Log.i("Test", "Try get last location");
 
             fusedLocationClient.getLastLocation()
                     .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -118,8 +126,11 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
                     });
         }
         else {
-            double latitude = Create_Memory.marker.getPosition().latitude;
-            double longitude = Create_Memory.marker.getPosition().longitude;
+
+            Log.i("Test", "Else");
+
+            double latitude = getIntent().getDoubleExtra("latitude", 0.0);
+            double longitude = getIntent().getDoubleExtra("longitude", 0.0);
 
             LatLng latLng = new LatLng(latitude, longitude);
 
@@ -152,7 +163,14 @@ public class Pick_Location extends AppCompatActivity implements OnMapReadyCallba
 
     public void ConfirmClicked(View v) {
         Log.i("Test", "Button clicked");
-        Create_Memory.marker = latest;
+
+        if (activity.equals("Create Memory")) {
+            Create_Memory.marker = latest;
+        }
+        else if (activity.equals("Memory Page")) {
+            Memory_Page.latitude = latest.getPosition().latitude;
+            Memory_Page.longitude = latest.getPosition().longitude;
+        }
         this.finish();
     }
 

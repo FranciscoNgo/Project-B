@@ -33,6 +33,8 @@ public class Collections extends AppCompatActivity {
 
         ArrayList<String> theList = new ArrayList<>();
 
+        final ArrayList<Integer> IDList = new ArrayList<>();
+
         Cursor data = myDB.getListContents();
 
         if(data.getCount() == 0){
@@ -41,6 +43,9 @@ public class Collections extends AppCompatActivity {
         else{
             while(data.moveToNext()){
                 theList.add(data.getString(1));
+
+                IDList.add(data.getInt(0));
+
                 ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
                 listView.setAdapter(listAdapter);
 
@@ -50,27 +55,14 @@ public class Collections extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Verkregen naam (title).
-                String name = parent.getItemAtPosition(position).toString();
-                //Door de title / naam door te geven aan de database krijg je de ID ervan terug. Hij zoekt in de eerste rij naar de ID.
-                Cursor data = myDB.getIDbyName(name);
-                int itemID = -1;
-                while(data.moveToNext()){
-                    itemID = data.getInt(0);
-                }
-                if(itemID > -1){
-                    Log.d(TAG, "onItemClick: The ID is: " + itemID);
-                    Intent volgendeIntent = new Intent(Collections.this, Memory_Page.class);
-                    //Geeft ID mee aan volgende Activity.
-                    volgendeIntent.putExtra("id",itemID);
-                    //Geeft name mee aan volgende Activity.
-                    volgendeIntent.putExtra("name",name);
-                    startActivity(volgendeIntent);
+                //Haalt de ID door middel van de position in de IDList ArrayList
+                int itemID = IDList.get(position);
 
-                }
-                else{
-                    //Mogelijke stuk tekst dat het niet is gelukt (ID IS NOT FOUND)
-                }
+                Log.d(TAG, "onItemClick: The ID is: " + itemID);
+                Intent volgendeIntent = new Intent(Collections.this, Memory_Page.class);
+                //Geeft ID mee aan volgende Activity.
+                volgendeIntent.putExtra("id",itemID);
+                startActivity(volgendeIntent);
 
 
             }

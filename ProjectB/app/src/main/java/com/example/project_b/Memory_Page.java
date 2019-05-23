@@ -22,6 +22,8 @@ public class Memory_Page extends AppCompatActivity {
     private String titleDB;
     private int idDB;
 
+    public static double latitude;
+    public static double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +37,20 @@ public class Memory_Page extends AppCompatActivity {
         //Verkrijgt ID
         idDB = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
 
-        //Verkrijgt Name
-        titleDB = receivedIntent.getStringExtra("name");
+        Cursor data = myDB.getMemory(idDB);
+
+        data.moveToFirst();
+
+        titleDB = data.getString(1);
+        latitude = data.getDouble(3);
+        longitude = data.getDouble(4);
+        String path = data.getString(6);
+        String fileName = data.getString(7);
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
 
-        String Path = myDB.getPathbyID(idDB);
-        String Filename = myDB.getFilenamebyID(idDB);
-
-        loadImageFromStorage(Path, Filename);
+        loadImageFromStorage(path, fileName);
 
     }
 
