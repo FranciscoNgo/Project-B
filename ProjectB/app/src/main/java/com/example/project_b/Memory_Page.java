@@ -48,7 +48,7 @@ public class Memory_Page extends AppCompatActivity {
 
     //Methode om een image te te loaden uit de internal storage.
     // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
-
+/*
     private void loadImageFromStorage(String path, String fileName)
     {
 
@@ -64,6 +64,7 @@ public class Memory_Page extends AppCompatActivity {
         }
 
     }
+    */
 
 
 }
