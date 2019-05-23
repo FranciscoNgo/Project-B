@@ -1,11 +1,17 @@
 package com.example.project_b;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class Memory_Page extends AppCompatActivity {
@@ -35,6 +41,28 @@ public class Memory_Page extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
+    }
+
+
+
+
+    //Methode om een image te te loaden uit de internal storage.
+    // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
+
+    private void loadImageFromStorage(String path, String fileName)
+    {
+
+        try {
+            File f=new File(path, fileName);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            ImageView img = findViewById(R.id.ImageView);
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 
