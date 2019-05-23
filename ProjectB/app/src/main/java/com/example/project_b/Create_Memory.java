@@ -1,7 +1,9 @@
 package com.example.project_b;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,12 +16,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 import com.google.android.gms.maps.model.Marker;
 
 public class Create_Memory extends AppCompatActivity {
 
     public static Marker marker;
+    public static Bitmap bitmap = null;
 
     DatabaseHelper myDB;
     Button btnAdd,btnView;
@@ -40,13 +50,13 @@ public class Create_Memory extends AppCompatActivity {
 
         // picture items
         btnpic = (Button) findViewById(R.id.button);
-        imgTakenPic = (ImageView)findViewById(R.id.imageView);
+        imgTakenPic = (ImageView)findViewById(R.id.rpick);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
-
 
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnView = (Button) findViewById(R.id.btnView);
+
 
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +95,8 @@ public class Create_Memory extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == CAM_REQUEST && data != null){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            bitmap = (Bitmap) data.getExtras().get("data");
+
             imgTakenPic.setImageBitmap(bitmap);
         }
     }
@@ -144,10 +155,20 @@ public class Create_Memory extends AppCompatActivity {
 
                 Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
 
+                if (bitmap != null) {
+                    String fileName = ID + "-1.jpg";
+
+                    String picturePath = saveToInternalStorage(bitmap, fileName);
+
+                    myDB.addPicture(picturePath, fileName, ID);
+
+                    Log.i("Adding", picturePath + " " + fileName);
+                }
+
                 editText.setText("");
                 Toast.makeText(this, "Successfully Entered Data!", Toast.LENGTH_LONG).show();
 
-
+                this.finish();
             }
         }
 
@@ -161,5 +182,52 @@ public class Create_Memory extends AppCompatActivity {
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "This is Pick Location", Toast.LENGTH_SHORT).show();
     }
+
+
+    private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory,fileName);
+
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+
+    }
+
+ //Methode om een image te te loaden uit de internal storage.
+    // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
+
+    private void loadImageFromStorage(String path, String fileName)
+    {
+
+        try {
+            File f=new File(path, fileName);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            ImageView img = findViewById(R.id.rpick);
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

@@ -16,10 +16,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String MEMORIES_COL1 = "MemoryID";
     public static final String MEMORIES_COL2 = "Item1";
 
-    public static final String LOCATION_TABLE_NAME = "location";
-    public static final String LOCATION_COL1 = "MemoryID";
-    public static final String LOCATION_COL2 = "Latitude";
-    public static final String LOCATION_COL3 = "Longitude";
+    public static final String LOCATIONS_TABLE_NAME = "locations";
+    public static final String LOCATIONS_COL1 = "MemoryID";
+    public static final String LOCATIONS_COL2 = "Latitude";
+    public static final String LOCATIONS_COL3 = "Longitude";
+
+    public static final String PICTURES_TABLE_NAME = "pictures";
+    public static final String PICTURES_COL1 = "MemoryID";
+    public static final String PICTURES_COL2 = "Path";
+    public static final String PICTURES_COL3 = "Filename";
+
 
     public DatabaseHelper(Context context){super(context,DATABASE_NAME,null,1);}
 
@@ -29,15 +35,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 MEMORIES_COL2 + " TEXT)";
         db.execSQL(createTableStories);
 
-        String createTableMarkers = "CREATE TABLE " + LOCATION_TABLE_NAME + " (" + LOCATION_COL1 + " INTEGER, " +
-                LOCATION_COL2 + " REAL, " + LOCATION_COL3 + " REAL, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
-        db.execSQL(createTableMarkers);
+        String createTableLocations = "CREATE TABLE " + LOCATIONS_TABLE_NAME + " (" + LOCATIONS_COL1 + " INTEGER, " +
+                LOCATIONS_COL2 + " REAL, " + LOCATIONS_COL3 + " REAL, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
+        db.execSQL(createTableLocations);
+
+        String createTablePictures = "CREATE TABLE " + PICTURES_TABLE_NAME + " (" + PICTURES_COL1 + " INTEGER, " +
+                PICTURES_COL2 + " TEXT, " + PICTURES_COL3 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
+        db.execSQL(createTablePictures);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + LOCATION_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
 
         onCreate(db);
     }
@@ -46,7 +58,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + LOCATION_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
 
         onCreate(db);
         Log.i("Test", "Restart Successful");
@@ -81,17 +94,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void addLocation(double latitude, double longitude, int ID){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(LOCATION_COL1, ID);
-        contentValues.put(LOCATION_COL2, latitude);
-        contentValues.put(LOCATION_COL3, longitude);
+        contentValues.put(LOCATIONS_COL1, ID);
+        contentValues.put(LOCATIONS_COL2, latitude);
+        contentValues.put(LOCATIONS_COL3, longitude);
 
-        db.insert(LOCATION_TABLE_NAME,null, contentValues);
+        db.insert(LOCATIONS_TABLE_NAME,null, contentValues);
     }
 
-    public Cursor getLocations(){
+    public Cursor getLocations() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m" + ", " + LOCATION_TABLE_NAME + " AS l " + " WHERE " +
-                "m." + MEMORIES_COL1 + " = l." + LOCATION_COL1 , null);
+        Cursor data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m" + ", " + LOCATIONS_TABLE_NAME + " AS l " + " WHERE " +
+                "m." + MEMORIES_COL1 + " = l." + LOCATIONS_COL1 , null);
         return data;
     }
 
@@ -103,5 +116,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+
+    public void addPicture(String path, String fileName , int ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PICTURES_COL1, ID);
+        contentValues.put(PICTURES_COL2, path);
+        contentValues.put(PICTURES_COL3, fileName);
+
+        db.insert(PICTURES_TABLE_NAME, null, contentValues);
+
+    }
+
+    public Cursor getPictures() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m" + ", " + PICTURES_TABLE_NAME + " AS p " + " WHERE " +
+                "m." + MEMORIES_COL1 + " = p." + PICTURES_COL1 , null);
+        return data;
+    }
 
 }
