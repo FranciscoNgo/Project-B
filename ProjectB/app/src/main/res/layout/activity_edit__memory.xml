@@ -12,13 +12,14 @@
 
     <Button
         android:id="@+id/buttonPick_Location"
-        android:fontFamily="@font/coffeetea"
-        android:textSize="25sp"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentEnd="true"
+        android:backgroundTint="#76D7C4  "
+        android:fontFamily="@font/coffeetea"
+        android:onClick="buttonClicked"
         android:text="@string/pick_location"
-        android:onClick="buttonClicked"/>
+        android:textSize="25sp" />
 
 </RelativeLayout>

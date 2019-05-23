@@ -29,6 +29,7 @@
         android:layout_height="122dp"
         android:layout_below="@+id/editText"
         android:layout_marginTop="188dp"
+        android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="@string/pick_location"
@@ -42,6 +43,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="340dp"
         android:layout_toEndOf="@id/buttonPick_Location"
+        android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:text="@string/add"
         android:textSize="24sp" />
@@ -56,6 +58,7 @@
         android:layout_marginTop="187dp"
         android:layout_marginEnd="2dp"
         android:layout_toEndOf="@id/btnAdd"
+        android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:text="@string/collections"
         android:textSize="24sp" />
@@ -71,6 +74,7 @@
         android:layout_marginEnd="17dp"
         android:layout_toStartOf="@+id/btnView"
         android:layout_toEndOf="@+id/buttonPick_Location"
+        android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:text="Make picture"
         android:textSize="24sp" />

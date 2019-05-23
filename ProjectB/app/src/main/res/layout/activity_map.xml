@@ -17,14 +17,15 @@
 
     <Button
         android:id="@+id/buttonMap_Filter"
-        android:fontFamily="@font/coffeetea"
-        android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="304dp"
         android:layout_marginTop="92dp"
+        android:backgroundTint="#76D7C4  "
+        android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Filter"
+        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
