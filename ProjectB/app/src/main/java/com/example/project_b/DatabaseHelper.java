@@ -24,6 +24,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PICTURES_TABLE_NAME = "pictures";
     public static final String PICTURES_COL1 = "MemoryID";
     public static final String PICTURES_COL2 = "Path";
+    public static final String PICTURES_COL3 = "Filename";
+
 
     public DatabaseHelper(Context context){super(context,DATABASE_NAME,null,1);}
 
@@ -38,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTableLocations);
 
         String createTablePictures = "CREATE TABLE " + PICTURES_TABLE_NAME + " (" + PICTURES_COL1 + " INTEGER, " +
-                PICTURES_COL2 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
+                PICTURES_COL2 + " TEXT, " + PICTURES_COL3 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
         db.execSQL(createTablePictures);
 
     }
@@ -107,11 +109,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void addPicture(String path , int ID) {
+    public void addPicture(String path, String fileName , int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PICTURES_COL1, ID);
         contentValues.put(PICTURES_COL2, path);
+        contentValues.put(PICTURES_COL3, fileName);
 
         db.insert(PICTURES_TABLE_NAME, null, contentValues);
 

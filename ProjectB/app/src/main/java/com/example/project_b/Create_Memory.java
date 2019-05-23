@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 public class Create_Memory extends AppCompatActivity {
 
     public static Marker marker;
-    public static String picturePath = null;
+    public static Bitmap bitmap = null;
 
     DatabaseHelper myDB;
     Button btnAdd,btnView;
@@ -52,7 +52,6 @@ public class Create_Memory extends AppCompatActivity {
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.rpick);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
-
 
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
@@ -96,10 +95,9 @@ public class Create_Memory extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == CAM_REQUEST && data != null){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            bitmap = (Bitmap) data.getExtras().get("data");
+
             imgTakenPic.setImageBitmap(bitmap);
-            picturePath = saveToInternalStorage(bitmap);
-            loadImageFromStorage(picturePath);
         }
     }
 
@@ -155,12 +153,16 @@ public class Create_Memory extends AppCompatActivity {
 
                 myDB.addLocation(marker.getPosition().latitude, marker.getPosition().longitude, ID);
 
-                Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude + " " + picturePath);
+                Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
 
-                if (picturePath != null) {
-                    myDB.addPicture(picturePath, ID);
+                if (bitmap != null) {
+                    String fileName = ID + "-1.jpg";
 
-                    Log.i("Adding", picturePath);
+                    String picturePath = saveToInternalStorage(bitmap, fileName);
+
+                    myDB.addPicture(picturePath, fileName, ID);
+
+                    Log.i("Adding", picturePath + " " + fileName);
                 }
 
                 editText.setText("");
@@ -182,12 +184,12 @@ public class Create_Memory extends AppCompatActivity {
     }
 
 
-    private String saveToInternalStorage(Bitmap bitmapImage){
+    private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath = new File(directory,"profile.jpg");
+        File mypath = new File(directory,fileName);
 
 
         FileOutputStream fos = null;
@@ -211,11 +213,11 @@ public class Create_Memory extends AppCompatActivity {
  //Methode om een image te te loaden uit de internal storage.
     // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
 
-    private void loadImageFromStorage(String path)
+    private void loadImageFromStorage(String path, String fileName)
     {
 
         try {
-            File f=new File(path, "profile.jpg");
+            File f=new File(path, fileName);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             ImageView img = findViewById(R.id.rpick);
             img.setImageBitmap(b);

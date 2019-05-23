@@ -51,13 +51,21 @@ public class Settings extends AppCompatActivity {
 
         if (dataPictures.getCount() > 0) {
 
-            String col4 = dataPictures.getString(3);
-
-            Log.i("Test", col4);
-
             String path = dataPictures.getString(3);
+            String fileName = dataPictures.getString(4);
 
-            loadImageFromStorage(path);
+            loadImageFromStorage(path, fileName, 1);
+
+            if (dataPictures.getCount() > 1) {
+
+                dataPictures.moveToPrevious();
+
+                path = dataPictures.getString(3);
+                fileName = dataPictures.getString(4);
+
+                loadImageFromStorage(path, fileName, 2);
+
+            }
         }
 
     }
@@ -86,13 +94,22 @@ public class Settings extends AppCompatActivity {
     }
 
 
-    private void loadImageFromStorage(String path)
+    private void loadImageFromStorage(String path, String fileName, int ID)
     {
 
         try {
-            File f=new File(path, "profile.jpg");
+            File f=new File(path, fileName);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img = findViewById(R.id.rpick);
+
+            ImageView img;
+
+            if (ID == 1) {
+                img = findViewById(R.id.rpick);
+            }
+            else {
+                img = findViewById(R.id.rpick2);
+            }
+
             img.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
