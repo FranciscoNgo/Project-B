@@ -27,23 +27,25 @@
 
             <Button
                 android:id="@+id/buttonMap"
-                android:fontFamily="@font/coffeetea"
-                android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:backgroundTint="#76D7C4  "
+                android:fontFamily="@font/coffeetea"
                 android:onClick="buttonClicked"
                 android:text="Map"
+                android:textSize="30sp"
                 tools:layout_editor_absoluteX="116dp"
                 tools:layout_editor_absoluteY="80dp" />
 
             <Button
                 android:id="@+id/buttonCreate_Memory"
-                android:fontFamily="@font/coffeetea"
-                android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:backgroundTint="#76D7C4  "
+                android:fontFamily="@font/coffeetea"
                 android:onClick="buttonClicked"
                 android:text="Create Memory"
+                android:textSize="30sp"
                 tools:layout_editor_absoluteX="106dp"
                 tools:layout_editor_absoluteY="202dp" />
         </TableRow>
@@ -55,23 +57,25 @@
 
             <Button
                 android:id="@+id/buttonSettings"
-                android:fontFamily="@font/coffeetea"
-                android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:backgroundTint="#8300ACC1"
+                android:fontFamily="@font/coffeetea"
                 android:onClick="buttonClicked"
                 android:text="Settings"
+                android:textSize="30sp"
                 tools:layout_editor_absoluteX="204dp"
                 tools:layout_editor_absoluteY="80dp" />
 
             <Button
                 android:id="@+id/buttonCollections"
-                android:fontFamily="@font/coffeetea"
-                android:textSize="30sp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:backgroundTint="#8300ACC1"
+                android:fontFamily="@font/coffeetea"
                 android:onClick="buttonClicked"
                 android:text="Collections"
+                android:textSize="30sp"
                 tools:layout_editor_absoluteX="90dp"
                 tools:layout_editor_absoluteY="80dp" />
         </TableRow>
