@@ -1,6 +1,7 @@
 package com.example.project_b;
 
 
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -29,9 +30,7 @@ public class Memory_Page extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-
         Intent receivedIntent = getIntent();
-
 
         //Verkrijgt ID
         idDB = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
@@ -41,14 +40,17 @@ public class Memory_Page extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
+
+        String Path = myDB.getPathbyID(idDB);
+        String Filename = myDB.getFilenamebyID(idDB);
+
+        loadImageFromStorage(Path, Filename);
+
     }
-
-
-
 
     //Methode om een image te te loaden uit de internal storage.
     // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
-/*
+
     private void loadImageFromStorage(String path, String fileName)
     {
 
@@ -64,7 +66,7 @@ public class Memory_Page extends AppCompatActivity {
         }
 
     }
-    */
+
 
 
 }

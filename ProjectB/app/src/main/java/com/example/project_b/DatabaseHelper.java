@@ -116,6 +116,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public String getPathbyID(int ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + PICTURES_COL2 + " FROM " + PICTURES_TABLE_NAME +
+                " WHERE " + PICTURES_COL1 + " = '" + ID + "'";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        String value = data.getString(0);
+        return value;
+    }
+
+    public String getFilenamebyID(int ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + PICTURES_COL3 + " FROM " + PICTURES_TABLE_NAME +
+                " WHERE " + PICTURES_COL1 + " = '" + ID + "'";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        String value = data.getString(0);
+        return value;
+    }
+
 
     public void addPicture(String path, String fileName , int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
