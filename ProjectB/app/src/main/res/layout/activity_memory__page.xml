@@ -28,7 +28,7 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="582dp"
         android:onClick="buttonClicked"
-        android:text="@string/edit_memory" />
+        android:text="Edit memory" />
 
     <TextView
         android:id="@+id/textView"

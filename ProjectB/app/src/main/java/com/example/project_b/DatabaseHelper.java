@@ -136,4 +136,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+
+    public void updateTitle(String newName, int id, String oldName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + MEMORIES_TABLE_NAME + " SET " + MEMORIES_COL2 +
+                " = '" + newName + "' WHERE " + MEMORIES_COL1 + " = '" + id + "'" +
+                " AND " + MEMORIES_COL2 + " = '" + oldName + "'";
+        //Log.d(TAG, "updateName: query: " + query);
+        //Log.d(TAG, "updateName: Setting name to " + newName);
+        db.execSQL(query);
+    }
+
+
 }

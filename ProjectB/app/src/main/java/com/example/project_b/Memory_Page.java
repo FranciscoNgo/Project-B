@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -34,7 +35,11 @@ public class Memory_Page extends AppCompatActivity {
     public static double latitude;
     public static double longitude;
 
-    public boolean editchecker = false;
+    public static boolean editchecker = false;
+    
+    Button btnEdit;
+    EditText editText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ public class Memory_Page extends AppCompatActivity {
         Intent receivedIntent = getIntent();
 
         //Verkrijgt ID
-        idDB = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
+        idDB = receivedIntent.getIntExtra("id", -1); //NOTE: -1 is just the default value
 
         Cursor data = myDB.getMemory(idDB);
 
@@ -66,17 +71,54 @@ public class Memory_Page extends AppCompatActivity {
         loadImageFromStorage(path, fileName);
         ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
+        btnEdit = (Button) findViewById(R.id.EButton);
 
-        textView.setOnClickListener(new View.OnClickListener(){
+
+        textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i("Adding", "Text worked !");
-                textView.setVisibility(textView.GONE);
-                editText.setVisibility(editText.VISIBLE);
+                if (editchecker) {
+                    textView.setVisibility(textView.GONE);
+                    editText.setVisibility(editText.VISIBLE);
+                    //EEtext = !EEtext;
+
+                }
             }
         });
 
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        ImageView.setOnClickListener(new View.OnClickListener(){
+
+                if (editchecker){
+                    String item = editText.getText().toString();
+                    if(!item.equals("")) {
+                        editchecker = !editchecker;
+                        myDB.updateTitle(item, idDB, titleDB);
+                        textView.setVisibility(textView.VISIBLE);
+                        editText.setVisibility(editText.GONE);
+                        textView.setText(item);
+                        btnEdit.setText("Edit memory");
+
+                    }
+                    else{
+                        editchecker = !editchecker;
+                        textView.setVisibility(textView.VISIBLE);
+                        editText.setVisibility(editText.GONE);
+                        textView.setText(item);
+                        btnEdit.setText("Edit memory");
+
+                    }
+                }
+                else{
+                    editchecker = !editchecker;
+                    btnEdit.setText("Change");
+                }
+            }
+        });
+
+        ImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i("Adding", "Picture worked!");
 
@@ -88,30 +130,15 @@ public class Memory_Page extends AppCompatActivity {
     //Methode om een image te te loaden uit de internal storage.
     // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
 
-    private void loadImageFromStorage(String path, String fileName)
-    {
+    private void loadImageFromStorage(String path, String fileName) {
 
         try {
-            File f=new File(path, fileName);
+            File f = new File(path, fileName);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             ImageView img = findViewById(R.id.ImageView);
             img.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
-
-    public void buttonClicked(View v) {
-
-        //delete button en edit button
-        if (v.getId() == R.id.DButton) {
-        //opens double check delete push notification; still has to be writen
-        } else if (v.getId() == R.id.EButton) {
-            editchecker =  !editchecker;
-        }
-    }
-
 }
