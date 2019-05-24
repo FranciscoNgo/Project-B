@@ -51,7 +51,7 @@ public class Create_Memory extends AppCompatActivity {
         // picture items
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.rpick);
-        btnpic.setOnClickListener(new btnTakePhotoClicker());
+        imgTakenPic.setOnClickListener(new btnTakePhotoClicker());
 
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);

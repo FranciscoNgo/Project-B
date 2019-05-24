@@ -1,6 +1,8 @@
 package com.example.project_b;
 
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +25,10 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static com.example.project_b.Create_Memory.bitmap;
 
 
 public class Memory_Page extends AppCompatActivity {
@@ -36,9 +42,16 @@ public class Memory_Page extends AppCompatActivity {
     public static double longitude;
 
     public static boolean editchecker = false;
-    
+
     Button btnEdit;
     EditText editText;
+
+    public static String fotoname;
+
+
+    ImageView ImageView;
+
+    private static final int CAM_REQUEST = 1313;
 
 
     @Override
@@ -61,27 +74,27 @@ public class Memory_Page extends AppCompatActivity {
         latitude = data.getDouble(3);
         longitude = data.getDouble(4);
         String path = data.getString(6);
-        String fileName = data.getString(7);
+        fotoname = data.getString(7);
 
         final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
 
         final EditText editText = (EditText) findViewById(R.id.EditText);
 
-        loadImageFromStorage(path, fileName);
-        ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
+        loadImageFromStorage(path, fotoname);
+        final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
         btnEdit = (Button) findViewById(R.id.EButton);
 
 
+        //ImageView.setOnClickListener(new btnTakePhotoClicker());
+
+
         textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("Adding", "Text worked !");
                 if (editchecker) {
                     textView.setVisibility(textView.GONE);
                     editText.setVisibility(editText.VISIBLE);
-                    //EEtext = !EEtext;
-
                 }
             }
         });
@@ -89,29 +102,23 @@ public class Memory_Page extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                if (editchecker){
+                if (editchecker) {
+                    editchecker = !editchecker;
                     String item = editText.getText().toString();
-                    if(!item.equals("")) {
-                        editchecker = !editchecker;
+                    if (!item.equals("")) {
                         myDB.updateTitle(item, idDB, titleDB);
                         textView.setVisibility(textView.VISIBLE);
                         editText.setVisibility(editText.GONE);
                         textView.setText(item);
                         btnEdit.setText("Edit memory");
 
-                    }
-                    else{
-                        editchecker = !editchecker;
+                    } else {
                         textView.setVisibility(textView.VISIBLE);
                         editText.setVisibility(editText.GONE);
-                        textView.setText(item);
+                        textView.setText(titleDB);
                         btnEdit.setText("Edit memory");
-
                     }
-                }
-                else{
+                } else {
                     editchecker = !editchecker;
                     btnEdit.setText("Change");
                 }
@@ -120,11 +127,12 @@ public class Memory_Page extends AppCompatActivity {
 
         ImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("Adding", "Picture worked!");
-
+                Log.i("Adding", Boolean.toString(editchecker));
+                if (editchecker == true) {
+                    ImageView.setOnClickListener(new btnTakePhotoClicker());
+                }
             }
         });
-
     }
 
     //Methode om een image te te loaden uit de internal storage.
@@ -141,4 +149,60 @@ public class Memory_Page extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAM_REQUEST && data != null) {
+            bitmap = (Bitmap) data.getExtras().get("data");
+            ImageView img = findViewById(R.id.ImageView);
+            img.setImageBitmap(bitmap);
+            saveToInternalStorage(bitmap, fotoname);
+            restartActivity();
+        }
+    }
+
+    class btnTakePhotoClicker implements ImageView.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, CAM_REQUEST);
+        }
+    }
+
+    public void restartActivity() {
+        Intent mIntent = getIntent();
+        finish();
+        startActivity(mIntent);
+    }
+
+
+    private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory,fileName);
+        
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+
+    }
+
+
 }
