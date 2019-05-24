@@ -4,6 +4,7 @@ package com.example.project_b;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -56,15 +58,20 @@ public class Memory_Page extends AppCompatActivity {
         String path = data.getString(6);
         String fileName = data.getString(7);
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
+
+        final EditText editText = (EditText) findViewById(R.id.EditText);
 
         loadImageFromStorage(path, fileName);
         ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
+
         textView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Log.i("Adding", "Text worked !");
+                textView.setVisibility(textView.GONE);
+                editText.setVisibility(editText.VISIBLE);
             }
         });
 
@@ -72,6 +79,7 @@ public class Memory_Page extends AppCompatActivity {
         ImageView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Log.i("Adding", "Picture worked!");
+
             }
         });
 
