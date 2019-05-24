@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +60,20 @@ public class Memory_Page extends AppCompatActivity {
         textView.setText(titleDB);
 
         loadImageFromStorage(path, fileName);
+        ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
+
+        textView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Log.i("Adding", "Text worked !");
+            }
+        });
+
+
+        ImageView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Log.i("Adding", "Picture worked!");
+            }
+        });
 
     }
 
@@ -83,11 +101,9 @@ public class Memory_Page extends AppCompatActivity {
         //delete button en edit button
         if (v.getId() == R.id.DButton) {
         //opens double check delete push notification; still has to be writen
-            Log.d("Adding", "Worked1");
         } else if (v.getId() == R.id.EButton) {
             editchecker =  !editchecker;
         }
     }
-
 
 }
