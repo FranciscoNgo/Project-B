@@ -9,23 +9,25 @@
 
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/DButton"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="201dp"
         android:layout_marginTop="583dp"
+        android:onClick="buttonClicked"
         android:text="Delete" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/EButton"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
         android:layout_marginTop="582dp"
+        android:onClick="buttonClicked"
         android:text="@string/edit_memory" />
 
     <TextView

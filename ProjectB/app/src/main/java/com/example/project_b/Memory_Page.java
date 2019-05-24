@@ -7,8 +7,11 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +27,8 @@ public class Memory_Page extends AppCompatActivity {
 
     public static double latitude;
     public static double longitude;
+
+    public boolean editchecker = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +78,16 @@ public class Memory_Page extends AppCompatActivity {
 
     }
 
+    public void buttonClicked(View v) {
+
+        //delete button en edit button
+        if (v.getId() == R.id.DButton) {
+        //opens double check delete push notification; still has to be writen
+            Log.d("Adding", "Worked1");
+        } else if (v.getId() == R.id.EButton) {
+            editchecker =  !editchecker;
+        }
+    }
 
 
 }
