@@ -60,6 +60,7 @@
         android:layout_marginTop="160dp"
         android:fontFamily="@font/signatra"
         android:text="Make picture"
+        android:onClick="BtnPicClicked"
         android:textSize="25sp" />
 
     <ImageView

@@ -137,34 +137,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void updateTitle(String newName, int id, String oldName){
+    public void updateTitle(String newName, int id){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + MEMORIES_TABLE_NAME + " SET " + MEMORIES_COL2 +
-                " = '" + newName + "' WHERE " + MEMORIES_COL1 + " = '" + id + "'" +
-                " AND " + MEMORIES_COL2 + " = '" + oldName + "'";
+                " = '" + newName + "' WHERE " + MEMORIES_COL1 + " = " + id;
         //Log.d(TAG, "updateName: query: " + query);
         //Log.d(TAG, "updateName: Setting name to " + newName);
         db.execSQL(query);
     }
 
-    public void deleteDatabase(int id, String title, double la, double lo, String pa, String fina){
+    public void deleteRecord(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String idtitle = "DELETE FROM " + MEMORIES_TABLE_NAME + " WHERE "
-                + MEMORIES_COL1 + " = '" + id + "'" +
-                " AND " + MEMORIES_COL2 + " = '" + title + "'";
-        String map = "DELETE FROM " + LOCATIONS_TABLE_NAME + " WHERE "
-                + LOCATIONS_COL1 + " = '" + id + "'" +
-                " AND " + LOCATIONS_COL2 + " = '" + la + "'" +
-                " AND " + LOCATIONS_COL3 + " = '" + lo + "'";
-        String picture = "DELETE FROM " + PICTURES_TABLE_NAME + " WHERE "
-                + PICTURES_COL1 + " = '" + id + "'" +
-                " AND " + PICTURES_COL2 + " = '" + pa + "'" +
-                " AND " + PICTURES_COL3 + " = '" + fina + "'";
         //Log.d(TAG, "deleteName: query: " + query);
         //Log.d(TAG, "deleteName: Deleting " + name + " from database.");
-        db.execSQL(idtitle);
-        db.execSQL(map);
-        db.execSQL(picture);
+        db.execSQL("DELETE FROM " + MEMORIES_TABLE_NAME + " WHERE " + MEMORIES_COL1 + " = " + id);
+        db.execSQL("DELETE FROM " + LOCATIONS_TABLE_NAME + " WHERE " + LOCATIONS_COL1 + " = " + id);
+        db.execSQL("DELETE FROM " + PICTURES_TABLE_NAME + " WHERE " + PICTURES_COL1 + " = " + id);
+
     }
 
 }

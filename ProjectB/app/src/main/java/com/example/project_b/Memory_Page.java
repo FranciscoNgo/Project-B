@@ -47,6 +47,8 @@ public class Memory_Page extends AppCompatActivity {
     Button btnEdit, btnDelete, btnYes, btnNo;
     EditText editText;
 
+    public static Bitmap bitmap;
+
     public static String fotoname;
 
     ImageView ImageView;
@@ -57,6 +59,8 @@ public class Memory_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory__page);
+
+        bitmap = null;
 
         myDB = new DatabaseHelper(this);
 
@@ -81,6 +85,7 @@ public class Memory_Page extends AppCompatActivity {
         final TextView DeleteText = (TextView) findViewById(R.id.DeleteText);
 
         final EditText editText = (EditText) findViewById(R.id.EditText);
+        editText.setText(titleDB);
 
         loadImageFromStorage(path, fotoname);
         final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
@@ -92,38 +97,37 @@ public class Memory_Page extends AppCompatActivity {
 
         //ImageView.setOnClickListener(new btnTakePhotoClicker());
 
-        textView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (editchecker) {
-                    textView.setVisibility(textView.GONE);
-                    editText.setVisibility(editText.VISIBLE);
-                }
-            }
-        });
-
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (editchecker) {
-                    editchecker = !editchecker;
-                    String item = editText.getText().toString();
-                    if (!item.equals("")) {
-                        myDB.updateTitle(item, idDB, titleDB);
-                        textView.setVisibility(textView.VISIBLE);
-                        editText.setVisibility(editText.GONE);
-                        textView.setText(item);
-                        btnEdit.setText("Edit memory");
 
-                    } else {
-                        textView.setVisibility(textView.VISIBLE);
-                        editText.setVisibility(editText.GONE);
-                        textView.setText(titleDB);
-                        btnEdit.setText("Edit memory");
+
+                    String item = editText.getText().toString();
+                    if ((!item.equals("") && !item.equals(titleDB)) || bitmap != null) {
+
+                        if ((!item.equals("") && !item.equals(titleDB))) {
+                            myDB.updateTitle(item, idDB);
+                            Log.i("Update", "title updated to: " + item);
+                            textView.setText(item);
+                        }
+
+                        if (bitmap != null) {
+                            saveToInternalStorage(bitmap, fotoname);
+                            Log.i("Update", "photo updated");
+                        }
                     }
+
+                    textView.setVisibility(textView.VISIBLE);
+                    editText.setVisibility(editText.GONE);
+                    btnEdit.setText("Edit memory");
+
                 } else {
-                    editchecker = !editchecker;
+                    textView.setVisibility(textView.GONE);
+                    editText.setVisibility(editText.VISIBLE);
                     btnEdit.setText("Change");
                 }
+                editchecker = !editchecker;
             }
         });
 
@@ -157,20 +161,12 @@ public class Memory_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                myDB.deleteDatabase(idDB,titleDB, latitude, longitude, path, fotoname );
+                myDB.deleteRecord(idDB);
                 deletedActivity();
 
             }
         });
 
-        ImageView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.i("Adding", Boolean.toString(editchecker));
-                if (editchecker == true) {
-                    ImageView.setOnClickListener(new btnTakePhotoClicker());
-                }
-            }
-        });
     }
 
     //Methode om een image te te loaden uit de internal storage.
@@ -196,29 +192,19 @@ public class Memory_Page extends AppCompatActivity {
             bitmap = (Bitmap) data.getExtras().get("data");
             ImageView img = findViewById(R.id.ImageView);
             img.setImageBitmap(bitmap);
-            saveToInternalStorage(bitmap, fotoname);
-            restartActivity();
         }
     }
 
-    class btnTakePhotoClicker implements ImageView.OnClickListener {
-
-        @Override
-        public void onClick(View view) {
+    public void ImgClicked(View view) {
+        if (editchecker) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, CAM_REQUEST);
         }
-    }
 
-    public void restartActivity() {
-        Intent mIntent = getIntent();
-        finish();
-        startActivity(mIntent);
     }
 
     public void deletedActivity() {
-        Intent intent = new Intent(this, Collections.class);
-        startActivity(intent);
+        finish();
         Toast.makeText(getApplicationContext(), "Memory deleted.", Toast.LENGTH_SHORT).show();
     }
 

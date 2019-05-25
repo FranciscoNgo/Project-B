@@ -35,7 +35,6 @@ public class Create_Memory extends AppCompatActivity {
     Button btnAdd,btnView;
     EditText editText;
 
-    Button btnpic;
     ImageView imgTakenPic;
     private static final int CAM_REQUEST = 1313;
 
@@ -49,7 +48,6 @@ public class Create_Memory extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
 
         // picture items
-        btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.rpick);
         //imgTakenPic.setOnClickListener(new btnTakePhotoClicker());
 
@@ -79,13 +77,6 @@ public class Create_Memory extends AppCompatActivity {
             }
         });
 
-        btnpic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnpic.setOnClickListener(new btnTakePhotoClicker());
-            }
-        });
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -108,13 +99,11 @@ public class Create_Memory extends AppCompatActivity {
         }
     }
 
-    class btnTakePhotoClicker implements  Button.OnClickListener{
 
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent,CAM_REQUEST);
-        }
+    public void BtnPicClicked(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,CAM_REQUEST);
+
     }
 
 

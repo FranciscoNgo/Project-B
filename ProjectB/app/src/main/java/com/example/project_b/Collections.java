@@ -23,34 +23,20 @@ public class Collections extends AppCompatActivity {
     DatabaseHelper myDB;
     private static final String TAG = "ListDataActivity";
 
+    public static ArrayList<String> theList;
+    public static ArrayList<Integer> IDList;
+
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections);
 
-        ListView listView = (ListView) findViewById(R.id.ListView);
+        listView = (ListView) findViewById(R.id.ListView);
         myDB = new DatabaseHelper(this);
 
-        ArrayList<String> theList = new ArrayList<>();
-
-        final ArrayList<Integer> IDList = new ArrayList<>();
-
-        Cursor data = myDB.getListContents();
-
-        if(data.getCount() == 0){
-            Toast.makeText(Collections.this, "The Database was empty :(.",Toast.LENGTH_LONG).show();
-        }
-        else{
-            while(data.moveToNext()){
-                theList.add(data.getString(1));
-
-                IDList.add(data.getInt(0));
-
-                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
-                listView.setAdapter(listAdapter);
-
-            }
-        }
+        getList();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,6 +67,37 @@ public class Collections extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getList();
+    }
+
+    public void getList() {
+
+        theList = new ArrayList<>();
+        IDList = new ArrayList<>();
+
+        Cursor data = myDB.getListContents();
+
+        if(data.getCount() == 0){
+            Toast.makeText(Collections.this, "The Database was empty :(.",Toast.LENGTH_LONG).show();
+        }
+        else{
+            while(data.moveToNext()){
+                theList.add(data.getString(1));
+
+                IDList.add(data.getInt(0));
+
+                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
+                listView.setAdapter(listAdapter);
+
+            }
+        }
+    }
+
 
     public void HomeClicked(View v) {
         if (v.getId() == R.id.buttonHome) {

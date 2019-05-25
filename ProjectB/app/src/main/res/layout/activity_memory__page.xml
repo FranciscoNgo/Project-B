@@ -42,7 +42,6 @@
         android:layout_marginTop="25dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:clickable="true"
         android:visibility="visible"/>
 
     <ImageView
@@ -54,6 +53,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="279dp"
         android:clickable="true"
+        android:onClick="ImgClicked"
         android:visibility="visible"/>
 
 
@@ -63,10 +63,13 @@
         android:layout_height="77dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="57dp"
         android:inputType=""
-        android:visibility="gone" />
+        android:textColor="#737373"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/DeleteText"
