@@ -37,7 +37,7 @@ public class Create_Memory extends AppCompatActivity {
 
     Button btnpic;
     ImageView imgTakenPic;
-    private static final int CAM_REQUEST=1313;
+    private static final int CAM_REQUEST = 1313;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class Create_Memory extends AppCompatActivity {
         // picture items
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.rpick);
-        imgTakenPic.setOnClickListener(new btnTakePhotoClicker());
+        //imgTakenPic.setOnClickListener(new btnTakePhotoClicker());
 
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
@@ -76,6 +76,13 @@ public class Create_Memory extends AppCompatActivity {
                 else {
                     Toast.makeText(Create_Memory.this, "You must put something in the text field!",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        btnpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnpic.setOnClickListener(new btnTakePhotoClicker());
             }
         });
 

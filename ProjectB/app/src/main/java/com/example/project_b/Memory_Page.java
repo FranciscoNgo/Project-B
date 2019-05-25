@@ -42,17 +42,16 @@ public class Memory_Page extends AppCompatActivity {
     public static double longitude;
 
     public static boolean editchecker = false;
+    public static boolean deletechecker = false;
 
-    Button btnEdit;
+    Button btnEdit, btnDelete, btnYes, btnNo;
     EditText editText;
 
     public static String fotoname;
 
-
     ImageView ImageView;
 
-    private static final int CAM_REQUEST = 1313;
-
+    private static final int CAM_REQUEST = 1888;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +72,13 @@ public class Memory_Page extends AppCompatActivity {
         titleDB = data.getString(1);
         latitude = data.getDouble(3);
         longitude = data.getDouble(4);
-        String path = data.getString(6);
+        final String path = data.getString(6);
         fotoname = data.getString(7);
 
         final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
+
+        final TextView DeleteText = (TextView) findViewById(R.id.DeleteText);
 
         final EditText editText = (EditText) findViewById(R.id.EditText);
 
@@ -85,10 +86,11 @@ public class Memory_Page extends AppCompatActivity {
         final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
         btnEdit = (Button) findViewById(R.id.EButton);
-
+        btnDelete = (Button) findViewById(R.id.DButton);
+        btnYes = (Button) findViewById(R.id.buttonYes);
+        btnNo = (Button) findViewById(R.id.buttonNo);
 
         //ImageView.setOnClickListener(new btnTakePhotoClicker());
-
 
         textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -122,6 +124,42 @@ public class Memory_Page extends AppCompatActivity {
                     editchecker = !editchecker;
                     btnEdit.setText("Change");
                 }
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    textView.setVisibility(textView.GONE);
+                    ImageView.setVisibility(ImageView.GONE);
+                    DeleteText.setVisibility(DeleteText.VISIBLE);
+                    btnDelete.setVisibility(btnDelete.GONE);
+                    btnEdit.setVisibility(btnEdit.GONE);
+                    btnYes.setVisibility(btnYes.VISIBLE);
+                    btnNo.setVisibility(btnYes.VISIBLE);
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setVisibility(textView.VISIBLE);
+                ImageView.setVisibility(ImageView.VISIBLE);
+                DeleteText.setVisibility(DeleteText.GONE);
+                btnDelete.setVisibility(btnDelete.VISIBLE);
+                btnEdit.setVisibility(btnEdit.VISIBLE);
+                btnYes.setVisibility(btnYes.GONE);
+                btnNo.setVisibility(btnYes.GONE);
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                myDB.deleteDatabase(idDB,titleDB, latitude, longitude, path, fotoname );
+                deletedActivity();
+
             }
         });
 
@@ -178,6 +216,11 @@ public class Memory_Page extends AppCompatActivity {
         startActivity(mIntent);
     }
 
+    public void deletedActivity() {
+        Intent intent = new Intent(this, Collections.class);
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Memory deleted.", Toast.LENGTH_SHORT).show();
+    }
 
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -203,6 +246,5 @@ public class Memory_Page extends AppCompatActivity {
         return directory.getAbsolutePath();
 
     }
-
 
 }
