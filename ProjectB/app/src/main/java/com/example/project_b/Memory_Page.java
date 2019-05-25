@@ -41,8 +41,8 @@ public class Memory_Page extends AppCompatActivity {
     public static double latitude;
     public static double longitude;
 
-    public static boolean editchecker = false;
-    public static boolean deletechecker = false;
+    public boolean editchecker = false;
+    //public static boolean deletechecker = false;
 
     Button btnEdit, btnDelete, btnYes, btnNo;
     EditText editText;
