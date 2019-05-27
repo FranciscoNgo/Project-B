@@ -16,13 +16,15 @@ import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import static com.example.project_b.Create_Memory.marker;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     DatabaseHelper myDB;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +43,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         toolbar_text.setText("Map");
 
-
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
-
 
     }
 
@@ -74,6 +73,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         Cursor dataLocation = myDB.getLocations();
 
         while(dataLocation.moveToNext()) {
+            final int id = dataLocation.getInt(0);
             String title = dataLocation.getString(1);
             double latitude = dataLocation.getDouble(3);
             double longitude = dataLocation.getDouble(4);
@@ -82,10 +82,18 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             Log.i("Calling", title + " "+ latitude + " " + longitude);
 
             mMap.addMarker(new MarkerOptions().position(latLng).title(title));
+
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Intent volgendeIntent = new Intent(Map.this, Memory_Page.class);
+                    //Geeft ID mee aan volgende Activity.
+                    volgendeIntent.putExtra("id",id);
+                    startActivity(volgendeIntent);
+                }
+            });
         }
-
     }
-
 
     public void HomeClicked(View v) {
         if (v.getId() == R.id.buttonHome) {
@@ -122,4 +130,5 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "This is Map Filter", Toast.LENGTH_SHORT).show();
     }
+
 }
