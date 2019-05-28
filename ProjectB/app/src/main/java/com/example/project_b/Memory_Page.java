@@ -28,9 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.example.project_b.Create_Memory.bitmap;
-
-
 public class Memory_Page extends AppCompatActivity {
 
     DatabaseHelper myDB;
@@ -47,9 +44,12 @@ public class Memory_Page extends AppCompatActivity {
     Button btnEdit, btnDelete, btnYes, btnNo;
     EditText editText;
 
-    public static Bitmap bitmap;
+    TextView emptyImageText;
 
-    public static String fotoname;
+    public Bitmap bitmap;
+
+    public String path;
+    public String photoName;
 
     ImageView ImageView;
 
@@ -59,6 +59,8 @@ public class Memory_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory__page);
+
+        emptyImageText = findViewById(R.id.emptyImageText);
 
         bitmap = null;
 
@@ -73,11 +75,22 @@ public class Memory_Page extends AppCompatActivity {
 
         data.moveToFirst();
 
+
         titleDB = data.getString(1);
         latitude = data.getDouble(3);
         longitude = data.getDouble(4);
-        final String path = data.getString(6);
-        fotoname = data.getString(7);
+
+
+        if (data.getColumnCount() > 5) {
+            path = data.getString(6);
+            photoName = data.getString(7);
+
+            loadImageFromStorage(path, photoName);
+        }
+
+        else {
+            photoName = idDB + "-1.jpg";
+        }
 
         final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
@@ -87,7 +100,6 @@ public class Memory_Page extends AppCompatActivity {
         final EditText editText = (EditText) findViewById(R.id.EditText);
         editText.setText(titleDB);
 
-        loadImageFromStorage(path, fotoname);
         final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
         btnEdit = (Button) findViewById(R.id.EButton);
@@ -113,16 +125,28 @@ public class Memory_Page extends AppCompatActivity {
                         }
 
                         if (bitmap != null) {
-                            saveToInternalStorage(bitmap, fotoname);
+                            path = saveToInternalStorage(bitmap, photoName);
+
+                            if (!myDB.checkForPicture(photoName)) {
+                                myDB.addPicture(path, photoName, idDB);
+                            }
+
                             Log.i("Update", "photo updated");
                         }
                     }
 
+                    if (emptyImageText.getVisibility() == TextView.VISIBLE) {
+                        emptyImageText.setVisibility(TextView.GONE);
+                    }
                     textView.setVisibility(textView.VISIBLE);
                     editText.setVisibility(editText.GONE);
                     btnEdit.setText("Edit memory");
 
-                } else {
+                }
+                else {
+                    if (path == null) {
+                        emptyImageText.setVisibility(TextView.VISIBLE);
+                    }
                     textView.setVisibility(textView.GONE);
                     editText.setVisibility(editText.VISIBLE);
                     btnEdit.setText("Change");
@@ -141,19 +165,30 @@ public class Memory_Page extends AppCompatActivity {
                     btnEdit.setVisibility(btnEdit.GONE);
                     btnYes.setVisibility(btnYes.VISIBLE);
                     btnNo.setVisibility(btnYes.VISIBLE);
+                    editText.setVisibility(editText.GONE);
+                    emptyImageText.setVisibility(TextView.GONE);
             }
         });
 
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setVisibility(textView.VISIBLE);
                 ImageView.setVisibility(ImageView.VISIBLE);
                 DeleteText.setVisibility(DeleteText.GONE);
                 btnDelete.setVisibility(btnDelete.VISIBLE);
                 btnEdit.setVisibility(btnEdit.VISIBLE);
                 btnYes.setVisibility(btnYes.GONE);
                 btnNo.setVisibility(btnYes.GONE);
+                if (editchecker) {
+                    editText.setVisibility(editText.VISIBLE);
+                    if (bitmap == null) {
+                        emptyImageText.setVisibility(TextView.VISIBLE);
+                    }
+                }
+                else {
+                    textView.setVisibility(textView.VISIBLE);
+                }
+
             }
         });
 
@@ -162,6 +197,14 @@ public class Memory_Page extends AppCompatActivity {
             public void onClick(View v) {
 
                 myDB.deleteRecord(idDB);
+
+                ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+                File file = new File(directory, photoName);
+                boolean deleted = file.delete();
+
+                Log.i("Delete", "Delete file " + photoName + " from internal storage outcome: " + deleted);
+
                 deletedActivity();
 
             }
@@ -191,7 +234,13 @@ public class Memory_Page extends AppCompatActivity {
         if (requestCode == CAM_REQUEST && data != null) {
             bitmap = (Bitmap) data.getExtras().get("data");
             ImageView img = findViewById(R.id.ImageView);
+
+            if (emptyImageText.getVisibility() == TextView.VISIBLE); {
+                emptyImageText.setVisibility(TextView.GONE);
+            }
+
             img.setImageBitmap(bitmap);
+
         }
     }
 

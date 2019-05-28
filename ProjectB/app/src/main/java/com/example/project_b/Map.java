@@ -43,10 +43,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         toolbar_text.setText("Map");
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.maps);
-        mapFragment.getMapAsync(this);
 
     }
 
@@ -69,6 +65,28 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         //mMap.addMarker(new MarkerOptions().position(rotterdam).title("Marker in Rotterdam"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(rotterdam));
 
+        refreshMarkers();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.maps);
+        mapFragment.getMapAsync(this);
+
+        Log.i("Test", "onResume called");
+
+        if (mMap != null) {
+            mMap.clear();
+            refreshMarkers();
+        }
+    }
+
+    public void refreshMarkers() {
         //Display markers
         Cursor dataLocation = myDB.getLocations();
 
@@ -93,7 +111,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 }
             });
         }
+
     }
+
 
     public void HomeClicked(View v) {
         if (v.getId() == R.id.buttonHome) {

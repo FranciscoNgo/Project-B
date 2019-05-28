@@ -84,17 +84,24 @@ public class Collections extends AppCompatActivity {
 
         if(data.getCount() == 0){
             Toast.makeText(Collections.this, "The Database was empty :(.",Toast.LENGTH_LONG).show();
+
+            listView.setAdapter(null);
+            listView.deferNotifyDataSetChanged();
+
+            listView.setEmptyView(findViewById(R.id.emptyElement));
+
         }
+
         else{
             while(data.moveToNext()){
                 theList.add(data.getString(1));
 
                 IDList.add(data.getInt(0));
 
-                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
-                listView.setAdapter(listAdapter);
-
             }
+
+            ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
+            listView.setAdapter(listAdapter);
         }
     }
 

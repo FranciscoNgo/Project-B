@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 public class Create_Memory extends AppCompatActivity {
 
     public static Marker marker;
-    public static Bitmap bitmap = null;
+    public Bitmap bitmap = null;
 
     DatabaseHelper myDB;
     Button btnAdd,btnView;

@@ -110,9 +110,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getMemory(int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m, " + LOCATIONS_TABLE_NAME + " AS l, " + PICTURES_TABLE_NAME + " AS p " +
                 " WHERE " + "m." + MEMORIES_COL1 + " = l." + LOCATIONS_COL1 + " AND m." + MEMORIES_COL1 + " = p." + PICTURES_COL1 +
                 " AND m." + MEMORIES_COL1 + " = " + ID, null);
+
+        if (data.getCount() == 0) {
+            Log.i("Test", "New query");
+            data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m, " + LOCATIONS_TABLE_NAME + " AS l" +
+                    " WHERE " + "m." + MEMORIES_COL1 + " = l." + LOCATIONS_COL1 +
+                    " AND m." + MEMORIES_COL1 + " = " + ID, null);
+        }
 
         return data;
     }
@@ -136,6 +144,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public boolean checkForPicture(String fileName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM " + PICTURES_TABLE_NAME + " WHERE " +
+                PICTURES_COL3 + " = '" + fileName + "'", null);
+        return data.getCount() > 0;
+    }
 
     public void updateTitle(String newName, int id){
         SQLiteDatabase db = this.getWritableDatabase();
