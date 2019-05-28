@@ -42,7 +42,7 @@
         android:layout_height="200dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="156dp"
-        android:background="@drawable/buttonbackground"
+        android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
@@ -55,31 +55,31 @@
         android:id="@+id/buttonCreate_Memory"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/buttonbackground"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Create Memory"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMap" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonSettings"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/buttonbackground"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Settings"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMap" />
 
     <Button
         android:id="@+id/buttonCollections"
@@ -87,13 +87,13 @@
         android:layout_height="200dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/buttonbackground"
+        android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Collections"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreate_Memory" />
 
 </android.support.constraint.ConstraintLayout>

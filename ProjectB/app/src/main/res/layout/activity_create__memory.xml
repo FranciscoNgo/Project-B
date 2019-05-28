@@ -21,7 +21,8 @@
         android:fontFamily="@font/coffeetea"
         android:hint="@string/write_something"
         android:inputType=""
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        />
 
     <Button
         android:id="@+id/buttonPick_Location"
@@ -33,7 +34,8 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="@string/pick_location"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:background="@drawable/mainbuttonbackground"/>
 
     <Button
         android:id="@+id/btnAdd"
@@ -43,6 +45,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="340dp"
         android:layout_toEndOf="@id/buttonPick_Location"
+        android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:text="@string/add"
@@ -61,7 +64,8 @@
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:text="@string/collections"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:background="@drawable/mainbuttonbackground"/>
 
     <Button
         android:id="@+id/button"
@@ -77,7 +81,8 @@
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:text="Make picture"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:background="@drawable/mainbuttonbackground"/>
 
     <ImageView
         android:id="@+id/imageView"
