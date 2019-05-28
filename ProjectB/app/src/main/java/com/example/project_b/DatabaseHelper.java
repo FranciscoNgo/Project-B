@@ -47,17 +47,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 PICTURES_COL2 + " TEXT, " + PICTURES_COL3 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
         db.execSQL(createTablePictures);
 
-        String creatTableStory = "CREATE TABLE " + STORIES_TABLE_NAME + " (" + STORIES_COL1 + " INTEGER, " +
-                STORIES_COL2 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
-        db.execSQL(creatTableStory);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
 
         onCreate(db);
@@ -68,7 +63,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
 
         onCreate(db);
@@ -110,7 +104,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(LOCATIONS_TABLE_NAME,null, contentValues);
     }
-
 
     public void addStory(String story, int ID){
         SQLiteDatabase db = this.getWritableDatabase();
