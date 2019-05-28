@@ -26,10 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PICTURES_COL2 = "Path";
     public static final String PICTURES_COL3 = "Filename";
 
-    public static final String STORIES_TABLE_NAME = "stories";
-    public static final String STORIES_COL1 = "MemoryID";
-    public static final String STORIES_COL2 = "story";
-
 
     public DatabaseHelper(Context context){super(context,DATABASE_NAME,null,1);}
 
@@ -103,15 +99,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(LOCATIONS_COL3, longitude);
 
         db.insert(LOCATIONS_TABLE_NAME,null, contentValues);
-    }
-
-    public void addStory(String story, int ID){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(STORIES_COL1, ID);
-        contentValues.put(STORIES_COL2, story);
-
-        db.insert(STORIES_TABLE_NAME, null, contentValues);
     }
 
     public Cursor getLocations() {

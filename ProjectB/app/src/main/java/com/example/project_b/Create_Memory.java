@@ -33,7 +33,7 @@ public class Create_Memory extends AppCompatActivity {
 
     DatabaseHelper myDB;
     Button btnAdd,btnView;
-    EditText editText, editStory;
+    EditText editText;
 
     ImageView imgTakenPic;
     private static final int CAM_REQUEST = 1313;
@@ -52,7 +52,6 @@ public class Create_Memory extends AppCompatActivity {
         //imgTakenPic.setOnClickListener(new btnTakePhotoClicker());
 
         editText = (EditText) findViewById(R.id.editText);
-        editStory = (EditText) findViewById(R.id.editStory);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnView = (Button) findViewById(R.id.btnView);
 
@@ -69,17 +68,11 @@ public class Create_Memory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newEntry = editText.getText().toString();
-                String newStory = editStory.getText().toString();
                 if (editText.length() != 0){
-                    if (editStory.length() != 0){
-                        AddData(newEntry, newStory);
-                    }
-                    else {
-                        Toast.makeText(Create_Memory.this, "You must give the memory a Story.",Toast.LENGTH_LONG).show();
-                    }
+                    AddData(newEntry);
                 }
                 else {
-                    Toast.makeText(Create_Memory.this, "You must give the memory a Title.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Create_Memory.this, "You must put something in the text field!",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -144,7 +137,7 @@ public class Create_Memory extends AppCompatActivity {
         }
     }
 
-    public void AddData(String newEntry, String newText) {
+    public void AddData(String newEntry) {
         if(marker != null) {
 
             int ID = myDB.addMemory(newEntry);
@@ -155,7 +148,6 @@ public class Create_Memory extends AppCompatActivity {
             } else {
 
                 myDB.addLocation(marker.getPosition().latitude, marker.getPosition().longitude, ID);
-                myDB.addStory(newText, ID);
 
                 Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
 
