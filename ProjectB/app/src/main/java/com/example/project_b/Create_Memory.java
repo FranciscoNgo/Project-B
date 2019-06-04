@@ -32,7 +32,7 @@ public class Create_Memory extends AppCompatActivity {
     public Bitmap bitmap = null;
 
     DatabaseHelper myDB;
-    Button btnAdd,btnView;
+    Button btnAdd,btnView,btnpic;
     EditText editText, editStory;
 
     ImageView imgTakenPic;
@@ -55,6 +55,10 @@ public class Create_Memory extends AppCompatActivity {
         editStory = (EditText) findViewById(R.id.editStory);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnView = (Button) findViewById(R.id.btnView);
+        btnpic = (Button) findViewById(R.id.button);
+        imgTakenPic = (ImageView)findViewById(R.id.rpick);
+        btnpic.setOnClickListener(new btnTakePhotoClicker());
+
 
 
         btnView.setOnClickListener(new View.OnClickListener() {
@@ -107,10 +111,13 @@ public class Create_Memory extends AppCompatActivity {
     }
 
 
-    public void BtnPicClicked(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,CAM_REQUEST);
+    class btnTakePhotoClicker implements  Button.OnClickListener{
 
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent,CAM_REQUEST);
+        }
     }
 
 
