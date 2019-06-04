@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Memory_Page">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+
 
     <Button
         android:id="@+id/DButton"
