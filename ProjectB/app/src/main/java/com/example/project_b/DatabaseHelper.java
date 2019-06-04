@@ -180,6 +180,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    public void updateStory(String newStory, int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + MEMORIES_STORIES + " SET " + STORIES_COL2 +
+                " = '" + newStory + "' WHERE " + STORIES_COL1 + " = " + id;
+        
+        db.execSQL(query);
+    }
+
     public void deleteRecord(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         //Log.d(TAG, "deleteName: query: " + query);
