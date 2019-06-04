@@ -12,24 +12,32 @@
 
     <Button
         android:id="@+id/buttonEdit_Memory"
-        android:fontFamily="@font/signatra"
-        android:textSize="25sp"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_below="@+id/buttonMemory_Filter_Sorter"
+        android:layout_width="200dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/mainbuttonbackground"
+        android:backgroundTint="#76D7C4  "
+        android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
-        android:text="@string/edit_memory"/>
+        android:text="@string/edit_memory"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/buttonMemory_Filter_Sorter"
-        android:fontFamily="@font/signatra"
-        android:textSize="25sp"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentEnd="true"
+        android:layout_width="200dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="58dp"
+        android:background="@drawable/mainbuttonbackground"
+        android:backgroundTint="#76D7C4  "
+        android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
-        android:text="@string/filter_and_sort"/>
+        android:text="@string/filter_and_sort"
+        android:textSize="25sp" />
 
 </RelativeLayout>
