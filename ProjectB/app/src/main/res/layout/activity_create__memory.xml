@@ -12,44 +12,68 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_width="230dp"
+        android:layout_height="185dp"
         android:layout_below="@+id/toolbar"
-        android:fontFamily="@font/signatra"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="3dp"
         android:autofillHints=""
+        android:fontFamily="@font/signatra"
         android:hint="@string/write_something"
         android:inputType=""
-        android:textSize="25sp"/>
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/editStory"
+        android:layout_width="389dp"
+        android:layout_height="209dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="209dp"
+        android:autofillHints=""
+        android:fontFamily="@font/signatra"
+        android:hint="@string/write_something"
+        android:inputType=""
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/buttonPick_Location"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="223dp"
         android:fontFamily="@font/signatra"
         android:onClick="buttonClicked"
         android:text="@string/pick_location"
         android:textSize="25sp" />
 
     <Button
+        android:id="@+id/btnAdd"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:id="@+id/btnAdd"
         android:layout_below="@id/editText"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="224dp"
         android:layout_toEndOf="@id/buttonPick_Location"
         android:fontFamily="@font/signatra"
         android:text="@string/add"
-        android:textSize="25sp"/>
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/btnView"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_below="@id/editText"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="226dp"
         android:layout_toEndOf="@id/btnAdd"
         android:fontFamily="@font/signatra"
         android:text="@string/collections"
-        android:textSize="25sp"/>
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/button"
@@ -57,20 +81,20 @@
         android:layout_height="77dp"
         android:layout_alignTop="@id/btnAdd"
         android:layout_marginLeft="133dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="153dp"
         android:fontFamily="@font/signatra"
-        android:text="Make picture"
         android:onClick="BtnPicClicked"
+        android:text="Make picture"
         android:textSize="25sp" />
 
     <ImageView
         android:id="@+id/rpick"
-        android:layout_width="123dp"
-        android:layout_height="120dp"
+        android:layout_width="168dp"
+        android:layout_height="173dp"
         android:layout_below="@+id/button"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="-436dp"
+        android:layout_marginStart="233dp"
+        android:layout_marginTop="-630dp"
         android:scaleType="centerCrop" />
 
 </RelativeLayout>
