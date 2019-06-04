@@ -83,6 +83,21 @@
         android:background="@android:color/transparent"
         android:visibility="gone"/>
 
+    <EditText
+        android:id="@+id/editStory"
+        android:layout_width="331dp"
+        android:layout_height="202dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="123dp"
+        android:background="@android:color/transparent"
+        android:inputType=""
+        android:textColor="#737373"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/DeleteText"
         android:layout_width="wrap_content"

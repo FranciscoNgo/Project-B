@@ -108,6 +108,9 @@ public class Memory_Page extends AppCompatActivity {
         final EditText editText = (EditText) findViewById(R.id.EditText);
         editText.setText(titleDB);
 
+        final EditText editText1 = (EditText) findViewById(R.id.editStory);
+        editText1.setText(Story);
+
         final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
         btnEdit = (Button) findViewById(R.id.EButton);
@@ -124,12 +127,19 @@ public class Memory_Page extends AppCompatActivity {
 
 
                     String item = editText.getText().toString();
-                    if ((!item.equals("") && !item.equals(titleDB)) || bitmap != null) {
+                    String item1 = editText1.getText().toString();
+                    if ((!item.equals("") && !item.equals(titleDB)) || bitmap != null || (!item1.equals("") && !item1.equals(titleDB))) {
 
                         if ((!item.equals("") && !item.equals(titleDB))) {
                             myDB.updateTitle(item, idDB);
                             Log.i("Update", "title updated to: " + item);
                             textView.setText(item);
+                        }
+
+                        if ((!item1.equals("") && !item1.equals(titleDB))) {
+                            myDB.updateStory(item1, idDB);
+                            Log.i("Update", "title updated to: " + item);
+                            textView1.setText(item1);
                         }
 
                         if (bitmap != null) {
@@ -147,7 +157,9 @@ public class Memory_Page extends AppCompatActivity {
                         emptyImageText.setVisibility(TextView.GONE);
                     }
                     textView.setVisibility(textView.VISIBLE);
+                    textView1.setVisibility(textView.VISIBLE);
                     editText.setVisibility(editText.GONE);
+                    editText1.setVisibility(editText.GONE);
                     btnEdit.setText("Edit memory");
 
                 }
@@ -156,7 +168,9 @@ public class Memory_Page extends AppCompatActivity {
                         emptyImageText.setVisibility(TextView.VISIBLE);
                     }
                     textView.setVisibility(textView.GONE);
+                    textView1.setVisibility(textView1.GONE);
                     editText.setVisibility(editText.VISIBLE);
+                    editText1.setVisibility(editText.VISIBLE);
                     btnEdit.setText("Change");
                 }
                 editchecker = !editchecker;
