@@ -20,7 +20,7 @@
         android:layout_marginTop="3dp"
         android:autofillHints=""
         android:fontFamily="@font/coffeetea"
-        android:hint="@string/write_something"
+        android:hint="Title"
         android:inputType=""
         android:textSize="25sp" />
 

@@ -16,6 +16,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="201dp"
         android:layout_marginTop="583dp"
+        android:backgroundTint="#76D7C4"
+        android:fontFamily="@font/coffeetea"
+        android:textSize="25sp"
         android:onClick="buttonClicked"
         android:text="Delete"
         android:visibility="visible"/>
@@ -29,6 +32,9 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="582dp"
         android:onClick="buttonClicked"
+        android:backgroundTint="#76D7C4"
+        android:fontFamily="@font/coffeetea"
+        android:textSize="25sp"
         android:text="Edit memory"
         android:visibility="visible"/>
 
