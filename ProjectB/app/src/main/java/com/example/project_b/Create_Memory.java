@@ -69,7 +69,7 @@ public class Create_Memory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newEntry = editText.getText().toString();
-                String newStory = editText.getText().toString();
+                String newStory = editStory.getText().toString();
                 if (editText.length() != 0){
                     if (editStory.length() != 0){
                         AddData(newEntry, newStory);
@@ -155,7 +155,8 @@ public class Create_Memory extends AppCompatActivity {
             } else {
 
                 myDB.addLocation(marker.getPosition().latitude, marker.getPosition().longitude, ID);
-
+                myDB.addStory(newStory, ID);
+                Log.i("Adding", newStory);
                 Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
 
                 if (bitmap != null) {

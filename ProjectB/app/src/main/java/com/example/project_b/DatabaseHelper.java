@@ -26,6 +26,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PICTURES_COL2 = "Path";
     public static final String PICTURES_COL3 = "Filename";
 
+    private static final String MEMORIES_STORIES = "Story";
+    private static final String STORIES_COL1 = "MemoryID";
+    private static final String STORIES_COL2 = "text";
+
 
     public DatabaseHelper(Context context){super(context,DATABASE_NAME,null,1);}
 
@@ -43,6 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 PICTURES_COL2 + " TEXT, " + PICTURES_COL3 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
         db.execSQL(createTablePictures);
 
+        String createTableStory = "CREATE TABLE " + MEMORIES_STORIES + " (" + STORIES_COL1 + " INTEGER, " +
+                STORIES_COL2 + " TEXT, " + "FOREIGN KEY(MemoryID) REFERENCES memories(MemoryID))";
+        db.execSQL(createTableStory);
+
     }
 
     @Override
@@ -50,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_STORIES);
 
         onCreate(db);
     }
@@ -60,6 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PICTURES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MEMORIES_STORIES);
 
         onCreate(db);
         Log.i("Test", "Restart Successful");
@@ -137,6 +147,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void addStory(String Story, int ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(STORIES_COL1, ID);
+        contentValues.put(STORIES_COL2, Story);
+
+        db.insert(MEMORIES_STORIES, null, contentValues);
+
+    }
+
     public Cursor getPictures() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT * FROM " + MEMORIES_TABLE_NAME + " AS m" + ", " + PICTURES_TABLE_NAME + " AS p " + " WHERE " +
@@ -168,6 +188,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + LOCATIONS_TABLE_NAME + " WHERE " + LOCATIONS_COL1 + " = " + id);
         db.execSQL("DELETE FROM " + PICTURES_TABLE_NAME + " WHERE " + PICTURES_COL1 + " = " + id);
 
+    }
+
+    public String getStorybyID(int ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + STORIES_COL2 + " FROM " + MEMORIES_STORIES +
+                " WHERE " + STORIES_COL1 + " = '" + ID + "'";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        String value = data.getString(0);
+        return value;
     }
 
 }

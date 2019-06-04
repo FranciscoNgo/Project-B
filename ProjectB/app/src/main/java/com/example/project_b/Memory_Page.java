@@ -46,10 +46,14 @@ public class Memory_Page extends AppCompatActivity {
 
     TextView emptyImageText;
 
+    public String Story;
+
     public Bitmap bitmap;
 
     public String path;
     public String photoName;
+
+
 
     ImageView ImageView;
 
@@ -75,7 +79,8 @@ public class Memory_Page extends AppCompatActivity {
 
         data.moveToFirst();
 
-
+        Story = myDB.getStorybyID(idDB);
+        Log.i("Update", Story);
         titleDB = data.getString(1);
         latitude = data.getDouble(3);
         longitude = data.getDouble(4);
@@ -94,6 +99,9 @@ public class Memory_Page extends AppCompatActivity {
 
         final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(titleDB);
+
+        final TextView textView1 = (TextView) findViewById(R.id.storyView);
+        textView1.setText(Story);
 
         final TextView DeleteText = (TextView) findViewById(R.id.DeleteText);
 
