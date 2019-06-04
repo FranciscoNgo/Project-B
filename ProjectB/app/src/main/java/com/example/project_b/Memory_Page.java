@@ -167,6 +167,7 @@ public class Memory_Page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     textView.setVisibility(textView.GONE);
+                    textView1.setVisibility(textView.GONE);
                     ImageView.setVisibility(ImageView.GONE);
                     DeleteText.setVisibility(DeleteText.VISIBLE);
                     btnDelete.setVisibility(btnDelete.GONE);
@@ -182,6 +183,7 @@ public class Memory_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageView.setVisibility(ImageView.VISIBLE);
+                textView1.setVisibility(textView.VISIBLE);
                 DeleteText.setVisibility(DeleteText.GONE);
                 btnDelete.setVisibility(btnDelete.VISIBLE);
                 btnEdit.setVisibility(btnEdit.VISIBLE);

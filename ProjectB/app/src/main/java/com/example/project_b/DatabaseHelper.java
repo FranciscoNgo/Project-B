@@ -187,6 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + MEMORIES_TABLE_NAME + " WHERE " + MEMORIES_COL1 + " = " + id);
         db.execSQL("DELETE FROM " + LOCATIONS_TABLE_NAME + " WHERE " + LOCATIONS_COL1 + " = " + id);
         db.execSQL("DELETE FROM " + PICTURES_TABLE_NAME + " WHERE " + PICTURES_COL1 + " = " + id);
+        db.execSQL("DELETE FROM " + MEMORIES_STORIES + " WHERE " + STORIES_COL1 + " = " + id);
 
     }
 
