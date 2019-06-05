@@ -10,11 +10,11 @@
 
     <Button
         android:id="@+id/DButton"
-        android:layout_width="160dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="100dp"
+        android:layout_alignTop="@+id/EButton"
+        android:layout_alignBottom="@+id/EButton"
+        android:layout_toEndOf="@+id/EButton"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="201dp"
         android:layout_marginTop="583dp"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
@@ -25,7 +25,7 @@
 
     <Button
         android:id="@+id/EButton"
-        android:layout_width="160dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -37,6 +37,19 @@
         android:textSize="25sp"
         android:text="Edit memory"
         android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/SButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/DButton"
+        android:layout_alignTop="@+id/EButton"
+        android:layout_alignBottom="@+id/EButton"
+        android:backgroundTint="#76D7C4"
+        android:fontFamily="@font/coffeetea"
+        android:textSize="20sp"
+        android:text="Share on Whatsapp"
+        />
 
     <TextView
         android:id="@+id/textView"
