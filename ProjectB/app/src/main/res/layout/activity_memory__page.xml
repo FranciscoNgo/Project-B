@@ -7,21 +7,21 @@
     tools:context=".Memory_Page">
 
 
-
     <Button
         android:id="@+id/DButton"
         android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignTop="@+id/EButton"
         android:layout_alignBottom="@+id/EButton"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/EButton"
         android:layout_marginTop="583dp"
+        android:layout_toEndOf="@+id/EButton"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
-        android:textSize="25sp"
         android:onClick="buttonClicked"
         android:text="Delete"
-        android:visibility="visible"/>
+        android:textSize="25sp"
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/EButton"
@@ -41,16 +41,16 @@
     <Button
         android:id="@+id/SButton"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/DButton"
+        android:layout_height="100dp"
         android:layout_alignTop="@+id/EButton"
         android:layout_alignBottom="@+id/EButton"
+        android:layout_toEndOf="@+id/DButton"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
-        android:textSize="20sp"
-        android:text="Share on Whatsapp"
         android:onClick="buttonClicked"
-        />
+        android:text="Share on Whatsapp"
+        android:textSize="20sp"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/textView"
