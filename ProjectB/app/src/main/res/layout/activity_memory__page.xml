@@ -49,7 +49,6 @@
         android:fontFamily="@font/coffeetea"
         android:textSize="20sp"
         android:text="Share on Whatsapp"
-        android:onClick="buttonClicked"
         />
 
     <TextView
