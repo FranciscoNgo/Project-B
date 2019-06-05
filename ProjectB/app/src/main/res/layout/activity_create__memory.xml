@@ -97,7 +97,7 @@
         android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
-        android:text="@string/make_picture"
+        android:text="Make Picture"
         android:textSize="24sp" />
 
 
