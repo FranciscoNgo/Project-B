@@ -32,7 +32,7 @@ public class Create_Memory extends AppCompatActivity {
     public Bitmap bitmap = null;
 
     DatabaseHelper myDB;
-    Button btnAdd,btnView,btnpic;
+    Button btnAdd,btnpic;
     EditText editText, editStory;
 
     ImageView imgTakenPic;
@@ -54,20 +54,10 @@ public class Create_Memory extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         editStory = (EditText) findViewById(R.id.editStory);
         btnAdd = (Button) findViewById(R.id.btnAdd);
-        btnView = (Button) findViewById(R.id.btnView);
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.rpick);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
 
-
-
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Create_Memory.this, Collections.class);
-                startActivity(intent);
-            }
-        });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
