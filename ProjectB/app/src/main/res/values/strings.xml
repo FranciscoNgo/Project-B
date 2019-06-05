@@ -15,4 +15,6 @@
     <string name="todo">TODO</string>
     <string name="no">No</string>
     <string name="take_a_picture"><![CDATA[>> Take a picture <<]]></string>
+    <string name="yes">Yes</string>
+    <string name="do_you_really_want_to_delete_the_memory">Do you really want to delete the Memory?</string>
 </resources>

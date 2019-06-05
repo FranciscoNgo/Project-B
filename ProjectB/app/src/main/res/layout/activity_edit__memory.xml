@@ -23,6 +23,7 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="@string/pick_location"
-        android:textSize="24sp" />
+        android:textAllCaps="false"
+        android:textSize="25sp" />
 
 </RelativeLayout>

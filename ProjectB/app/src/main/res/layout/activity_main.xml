@@ -46,6 +46,7 @@
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
+        android:textAllCaps="false"
         android:text="Map"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +63,7 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Create Memory"
+        android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,6 +79,7 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Settings"
+        android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMap" />
@@ -92,6 +95,7 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Collections"
+        android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCreate_Memory" />

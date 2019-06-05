@@ -26,6 +26,7 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="Filter"
+        android:textAllCaps="false"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

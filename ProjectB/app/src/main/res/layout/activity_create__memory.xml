@@ -55,7 +55,8 @@
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
         android:text="@string/pick_location"
-        android:textSize="24sp" />
+        android:textAllCaps="false"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/btnAdd"
@@ -68,8 +69,9 @@
         android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
-        android:text="@string/add"
-        android:textSize="24sp" />
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/button"
@@ -82,8 +84,9 @@
         android:background="@drawable/mainbuttonbackground"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
-        android:text="@string/make_picture"
-        android:textSize="24sp" />
+        android:text="Make picture"
+        android:textAllCaps="false"
+        android:textSize="25sp" />
 
 
     <ImageView

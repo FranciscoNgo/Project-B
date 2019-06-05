@@ -22,7 +22,8 @@
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
-        android:text="@string/edit_memory"
+        android:text="Edit"
+        android:textAllCaps="false"
         android:textSize="25sp" />
 
     <Button
@@ -37,6 +38,7 @@
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
+        android:textAllCaps="false"
         android:text="@string/filter_and_sort"
         android:textSize="25sp" />
 
