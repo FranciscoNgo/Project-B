@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Project-B</string>
-    <string name="toolbar_label">Test</string>
+    <string name="toolbar_label">Your Memory</string>
     <string name="title_activity_map">Map</string>
     <string name="open_collections">Open Collections</string>
-    <string name="write_something">Write something...</string>
     <string name="pick_location">Pick Location</string>
     <string name="add">add</string>
     <string name="memory_displayer">Memory Displayer</string>
@@ -12,4 +11,8 @@
     <string name="filter_and_sort">Filter and Sort</string>
     <string name="make_picture">Make picture</string>
     <string name="title">Title</string>
+    <string name="write_something">Write something ...</string>
+    <string name="todo">TODO</string>
+    <string name="no">No</string>
+    <string name="take_a_picture"><![CDATA[>> Take a picture <<]]></string>
 </resources>

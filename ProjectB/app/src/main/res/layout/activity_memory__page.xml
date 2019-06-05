@@ -6,27 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".Memory_Page">
 
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <Button
         android:id="@+id/DButton"
-        android:layout_width="160dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="201dp"
         android:layout_marginTop="583dp"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:onClick="buttonClicked"
+        android:background="@drawable/mainbuttonbackground"
         android:text="Delete"
         android:visibility="visible"/>
 
     <Button
         android:id="@+id/EButton"
-        android:layout_width="160dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
@@ -34,19 +37,23 @@
         android:onClick="buttonClicked"
         android:backgroundTint="#76D7C4"
         android:fontFamily="@font/coffeetea"
-        android:textSize="25sp"
-        android:text="Edit memory"
+        android:background="@drawable/mainbuttonbackground"
+        android:textSize="24sp"
+        android:text="Edit"
         android:visibility="visible"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="315dp"
         android:layout_height="77dp"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="25dp"
-        android:textSize="20sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/coffeetea"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:visibility="visible"/>
 
@@ -54,11 +61,14 @@
         android:id="@+id/storyView"
         android:layout_width="331dp"
         android:layout_height="202dp"
+        android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="122dp"
-        android:textSize="20sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/coffeetea"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:visibility="visible" />
 
@@ -79,28 +89,35 @@
         android:id="@+id/EditText"
         android:layout_width="315dp"
         android:layout_height="77dp"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="57dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/coffeetea"
         android:inputType=""
         android:textColor="#737373"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:background="@android:color/transparent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/editStory"
         android:layout_width="331dp"
         android:layout_height="202dp"
+        android:layout_below="@+id/EditText"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="34dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
         android:background="@android:color/transparent"
         android:inputType=""
         android:textColor="#737373"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:fontFamily="@font/coffeetea"
         android:textStyle="bold"
         android:visibility="gone" />
 
@@ -112,7 +129,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="175dp"
-        android:text="Are you sure you want to delete the Memory?"
+        android:text="Do you really want to delete the Memory?"
+        android:fontFamily="@font/coffeetea"
         android:textSize="35sp"
         android:textStyle="bold"
         android:visibility="gone"/>
@@ -125,7 +143,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="216dp"
+        android:background="@drawable/mainbuttonbackground"
+        android:backgroundTint="#76D7C4"
+        android:fontFamily="@font/coffeetea"
         android:text="Yes"
+        android:textSize="24sp"
         android:visibility="gone"/>
 
     <Button
@@ -136,7 +158,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="62dp"
         android:layout_marginBottom="215dp"
-        android:text="No"
+        android:background="@drawable/mainbuttonbackground"
+        android:backgroundTint="#76D7C4"
+        android:fontFamily="@font/coffeetea"
+        android:text="@string/no"
+        android:textSize="24sp"
         android:visibility="gone"/>
 
     <TextView
@@ -150,11 +176,12 @@
         android:background="@drawable/border"
         android:gravity="center"
         android:visibility="gone"
+        android:fontFamily="@font/coffeetea"
         android:textSize="35sp"
         android:textStyle="bold"
         android:textColor="@color/border"
         android:clickable="true"
         android:onClick="ImgClicked"
-        android:text="Press here to take a picture"/>
+        android:text="@string/take_a_picture"/>
 
 </RelativeLayout>
