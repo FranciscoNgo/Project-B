@@ -50,16 +50,4 @@ public class Edit_Memory extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buttonClicked(View v) {
-
-        if (v.getId() == R.id.buttonPick_Location) {
-            openPick_Location();
-        }
-    }
-
-    public void openPick_Location() {
-        Intent intent = new Intent(this, Pick_Location.class);
-        startActivity(intent);
-    }
-
 }
