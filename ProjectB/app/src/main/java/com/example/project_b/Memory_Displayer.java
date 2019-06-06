@@ -37,7 +37,6 @@ public class Memory_Displayer extends AppCompatActivity {
     public void openHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Menu", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -64,12 +63,10 @@ public class Memory_Displayer extends AppCompatActivity {
     public void openEdit_Memory() {
         Intent intent = new Intent(this, Edit_Memory.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Edit Memory", Toast.LENGTH_SHORT).show();
     }
 
     public void openMemory_Filter_Sorter() {
         Intent intent = new Intent(this, Memory_Filter_Sorter.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Memory Filter/Sorter", Toast.LENGTH_SHORT).show();
     }
 }

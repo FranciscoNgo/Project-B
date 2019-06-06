@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     public void openHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Menu", Toast.LENGTH_SHORT).show();
     }
 
     public void buttonClicked(View v) {
@@ -76,25 +75,21 @@ public class MainActivity extends AppCompatActivity {
     public void openMap() {
         Intent intent = new Intent(this, Map.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Map", Toast.LENGTH_SHORT).show();
     }
 
     public void openCollections() {
         Intent intent = new Intent(this, Collections.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Collections", Toast.LENGTH_SHORT).show();
     }
 
     public void openSettings() {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Settings", Toast.LENGTH_SHORT).show();
     }
 
     public void openCreate_Memory() {
         Intent intent = new Intent(this, Create_Memory.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Create Memory", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -124,7 +124,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void openHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Menu", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -148,7 +147,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void openMap_Filter() {
         Intent intent = new Intent(this, Map_Filter.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Map Filter", Toast.LENGTH_SHORT).show();
     }
 
 }

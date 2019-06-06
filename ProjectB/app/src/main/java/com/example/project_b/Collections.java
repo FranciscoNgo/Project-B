@@ -83,8 +83,6 @@ public class Collections extends AppCompatActivity {
         Cursor data = myDB.getListContents();
 
         if(data.getCount() == 0){
-            Toast.makeText(Collections.this, "The Database was empty :(.",Toast.LENGTH_LONG).show();
-
             listView.setAdapter(null);
             listView.deferNotifyDataSetChanged();
 
@@ -115,7 +113,6 @@ public class Collections extends AppCompatActivity {
     public void openHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Menu", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -140,7 +137,6 @@ public class Collections extends AppCompatActivity {
     public void openMemory_Displayer() {
         Intent intent = new Intent(this, Memory_Displayer.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Memory Displayer", Toast.LENGTH_SHORT).show();
     }
 
 

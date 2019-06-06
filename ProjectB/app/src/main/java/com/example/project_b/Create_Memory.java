@@ -120,7 +120,6 @@ public class Create_Memory extends AppCompatActivity {
     public void openHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Menu", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -147,7 +146,7 @@ public class Create_Memory extends AppCompatActivity {
             int ID = myDB.addMemory(newEntry);
 
             if (ID == -1) {
-                Toast.makeText(this, "Something went wrong :(.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Something went wrong :(", Toast.LENGTH_LONG).show();
 
             } else {
 
@@ -167,14 +166,14 @@ public class Create_Memory extends AppCompatActivity {
                 }
 
                 editText.setText("");
-                Toast.makeText(this, "Successfully Entered Data!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Story is saved!", Toast.LENGTH_LONG).show();
 
                 this.finish();
             }
         }
 
         else {
-            Toast.makeText(Create_Memory.this, "Choose a location first.", Toast.LENGTH_LONG).show();
+            Toast.makeText(Create_Memory.this, "Pick a location.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -190,8 +189,6 @@ public class Create_Memory extends AppCompatActivity {
         }
 
         startActivity(intent);
-
-        Toast.makeText(getApplicationContext(), "This is Pick Location", Toast.LENGTH_SHORT).show();
     }
 
 

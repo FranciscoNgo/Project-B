@@ -37,7 +37,6 @@ public class Edit_Memory extends AppCompatActivity {
     public void openHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Menu", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -61,7 +60,6 @@ public class Edit_Memory extends AppCompatActivity {
     public void openPick_Location() {
         Intent intent = new Intent(this, Pick_Location.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "This is Pick Location", Toast.LENGTH_SHORT).show();
     }
 
 }
