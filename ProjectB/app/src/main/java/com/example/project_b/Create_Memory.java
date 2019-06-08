@@ -203,7 +203,6 @@ public class Create_Memory extends AppCompatActivity {
         File mypath = new File(directory,fileName);
 
 
-
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);
