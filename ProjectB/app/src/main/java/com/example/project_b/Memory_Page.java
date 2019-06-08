@@ -241,8 +241,8 @@ public class Memory_Page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String shareBody = "Your body here";
-                String shareSub = "Test";
+                String shareBody = titleDB + "\n" + Story;
+                String shareSub = Story;
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(myIntent, "Share your stuff"));
