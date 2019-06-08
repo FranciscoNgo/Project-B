@@ -189,6 +189,7 @@ public class Memory_Page extends AppCompatActivity {
                     btnEdit.setVisibility(btnEdit.GONE);
                     btnYes.setVisibility(btnYes.VISIBLE);
                     btnNo.setVisibility(btnYes.VISIBLE);
+                    btnShare.setVisibility(btnShare.GONE);
                     editText.setVisibility(editText.GONE);
                     emptyImageText.setVisibility(TextView.GONE);
             }
