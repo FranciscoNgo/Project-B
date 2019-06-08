@@ -41,7 +41,7 @@ public class Memory_Page extends AppCompatActivity {
     public boolean editchecker = false;
     //public static boolean deletechecker = false;
 
-    Button btnEdit, btnDelete, btnYes, btnNo;
+    Button btnEdit, btnDelete, btnYes, btnNo,btnShare;
     EditText editText;
 
     TextView emptyImageText;
@@ -117,6 +117,7 @@ public class Memory_Page extends AppCompatActivity {
         btnDelete = (Button) findViewById(R.id.DButton);
         btnYes = (Button) findViewById(R.id.buttonYes);
         btnNo = (Button) findViewById(R.id.buttonNo);
+        btnShare = (Button) findViewById(R.id.SButton);
 
         //ImageView.setOnClickListener(new btnTakePhotoClicker());
 
@@ -231,6 +232,19 @@ public class Memory_Page extends AppCompatActivity {
 
                 deletedActivity();
 
+            }
+        });
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = "Your body here";
+                String shareSub = "Test";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(myIntent, "Share your stuff"));
             }
         });
 
