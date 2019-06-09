@@ -254,25 +254,13 @@ public class Memory_Page extends AppCompatActivity {
             public void onClick(View v) {
                 //Button vraagt WRITE_EXTERNAL_STORAGE permission aan
                 if (ContextCompat.checkSelfPermission(Memory_Page.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(Memory_Page.this, "You have already granted this permission!", Toast.LENGTH_SHORT).show();
-                } else {
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestStoragePermission();
-                }
+                } 
 
 
                 //new share function voor screenshot
                 shareit();
-
-                //share title en bodytext
-
-                //Intent myIntent = new Intent(Intent.ACTION_SEND);
-                //myIntent.setType("text/plain");
-                //String shareBody = titleDB + "\n" + Story;
-                //String shareSub = Story;
-                //myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-                //myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-                //startActivity(Intent.createChooser(myIntent, "Share your stuff"));
 
             }
         });
