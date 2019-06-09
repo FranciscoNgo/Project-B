@@ -1,11 +1,15 @@
 package com.example.project_b;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +59,7 @@ public class Memory_Page extends AppCompatActivity {
 
 
 
+
     ImageView ImageView;
 
     private static final int CAM_REQUEST = 1888;
@@ -78,6 +83,7 @@ public class Memory_Page extends AppCompatActivity {
         Cursor data = myDB.getMemory(idDB);
 
         data.moveToFirst();
+
 
         Story = myDB.getStorybyID(idDB);
         Log.i("Update", Story);
@@ -240,13 +246,19 @@ public class Memory_Page extends AppCompatActivity {
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = titleDB + "\n" + Story;
-                String shareSub = Story;
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(myIntent, "Share your stuff"));
+                //new share function voor screenshot
+                shareit();
+
+                //share title en bodytext
+
+                //Intent myIntent = new Intent(Intent.ACTION_SEND);
+                //myIntent.setType("text/plain");
+                //String shareBody = titleDB + "\n" + Story;
+                //String shareSub = Story;
+                //myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                //myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                //startActivity(Intent.createChooser(myIntent, "Share your stuff"));
+
             }
         });
 
@@ -320,6 +332,57 @@ public class Memory_Page extends AppCompatActivity {
         }
         return directory.getAbsolutePath();
 
+    }
+
+    public void shareit()
+    {
+        View view =  getWindow().getDecorView().getRootView();
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state))
+        {
+            File picDir  = new File(Environment.getExternalStorageDirectory()+ "/myPic");
+            if (!picDir.exists())
+            {
+                picDir.mkdir();
+            }
+            view.setDrawingCacheEnabled(true);
+            view.buildDrawingCache(true);
+            Bitmap bitmap = view.getDrawingCache();
+//          Date date = new Date();
+            String fileName = "Screenshot" + ".jpg";
+            File picFile = new File(picDir + "/" + fileName);
+            try
+            {
+                picFile.createNewFile();
+                FileOutputStream picOut = new FileOutputStream(picFile);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), (int)(bitmap.getHeight()/1.2));
+                boolean saved = bitmap.compress(Bitmap.CompressFormat.JPEG, 100, picOut);
+                if (saved)
+                {
+                    Toast.makeText(getApplicationContext(), "Image saved to your device Pictures "+ "directory!", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    Toast.makeText(getApplicationContext(), "error saving", Toast.LENGTH_SHORT).show();
+                }
+                picOut.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            view.destroyDrawingCache();
+
+            // share via intent
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("image/jpeg");
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(picFile.getAbsolutePath()));
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+
+        } else {
+            //Error
+
+        }
     }
 
 }
