@@ -19,12 +19,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import static com.example.project_b.Create_Memory.marker;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     DatabaseHelper myDB;
+
+    public ArrayList<Marker> markerList;
+    public ArrayList<Integer> IDList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,30 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         refreshMarkers();
 
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent nextIntent = new Intent(Map.this, Memory_Page.class);
+
+                Log.i("Latitude", Double.toString(marker.getPosition().latitude));
+                Log.i("Longitude", Double.toString(marker.getPosition().longitude));
+
+                Log.i("markerList Size", Integer.toString(markerList.size()));
+                Log.i("IDList Size", Integer.toString(IDList.size()));
+
+                int index = markerList.indexOf(marker);
+
+                Log.i("Index", Integer.toString(index));
+
+                Log.i("ID", Integer.toString(IDList.get(index)));
+
+
+                //Geeft ID mee aan volgende Activity.
+                nextIntent.putExtra("id", IDList.get(index));
+                startActivity(nextIntent);
+            }
+        });
+
     }
 
     @Override
@@ -82,34 +111,31 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         if (mMap != null) {
             mMap.clear();
-            refreshMarkers();
         }
     }
 
     public void refreshMarkers() {
+
+        Log.i("Calling", "RefreshMarkers");
+
+        markerList = new ArrayList<>();
+        IDList = new ArrayList<>();
+
         //Display markers
         Cursor dataLocation = myDB.getLocations();
 
         while(dataLocation.moveToNext()) {
-            final int id = dataLocation.getInt(0);
+            int id = dataLocation.getInt(0);
             String title = dataLocation.getString(1);
-            double latitude = dataLocation.getDouble(3);
-            double longitude = dataLocation.getDouble(4);
+            double latitude = dataLocation.getDouble(4);
+            double longitude = dataLocation.getDouble(5);
             LatLng latLng = new LatLng(latitude, longitude);
 
             Log.i("Calling", title + " "+ latitude + " " + longitude);
 
-            mMap.addMarker(new MarkerOptions().position(latLng).title(title));
+            markerList.add(mMap.addMarker(new MarkerOptions().position(latLng).title(title)));
+            IDList.add(id);
 
-            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                @Override
-                public void onInfoWindowClick(Marker marker) {
-                    Intent volgendeIntent = new Intent(Map.this, Memory_Page.class);
-                    //Geeft ID mee aan volgende Activity.
-                    volgendeIntent.putExtra("id",id);
-                    startActivity(volgendeIntent);
-                }
-            });
         }
 
     }

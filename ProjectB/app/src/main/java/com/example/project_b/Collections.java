@@ -23,8 +23,8 @@ public class Collections extends AppCompatActivity {
     DatabaseHelper myDB;
     private static final String TAG = "ListDataActivity";
 
-    public static ArrayList<String> theList;
-    public static ArrayList<Integer> IDList;
+    public ArrayList<String> theList;
+    public ArrayList<Integer> IDList;
 
     ListView listView;
 

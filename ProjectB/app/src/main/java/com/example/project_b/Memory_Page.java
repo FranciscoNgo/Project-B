@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +48,7 @@ public class Memory_Page extends AppCompatActivity {
 
     TextView emptyImageText;
 
-    public String Story;
+    public String story;
 
     public Bitmap bitmap;
 
@@ -65,6 +66,16 @@ public class Memory_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory__page);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final TextView toolbar_text = findViewById(R.id.toolbar_text);
+
+        toolbar_text.setText("Your Memory");
+
         emptyImageText = findViewById(R.id.emptyImageText);
 
         bitmap = null;
@@ -80,16 +91,17 @@ public class Memory_Page extends AppCompatActivity {
 
         data.moveToFirst();
 
-        Story = myDB.getStorybyID(idDB);
-        Log.i("Update", Story);
+
         titleDB = data.getString(1);
-        latitude = data.getDouble(3);
-        longitude = data.getDouble(4);
+        story = data.getString(2);
+        latitude = data.getDouble(4);
+        longitude = data.getDouble(5);
 
+        Log.i("Update", story);
 
-        if (data.getColumnCount() > 5) {
-            path = data.getString(6);
-            photoName = data.getString(7);
+        if (data.getColumnCount() > 6) {
+            path = data.getString(7);
+            photoName = data.getString(8);
 
             loadImageFromStorage(path, photoName);
         }
@@ -102,7 +114,7 @@ public class Memory_Page extends AppCompatActivity {
         textView.setText(titleDB);
 
         final TextView textView1 = (TextView) findViewById(R.id.storyView);
-        textView1.setText(Story);
+        textView1.setText(story);
 
         final TextView DeleteText = (TextView) findViewById(R.id.DeleteText);
 
@@ -110,7 +122,7 @@ public class Memory_Page extends AppCompatActivity {
         editText.setText(titleDB);
 
         final EditText editText1 = (EditText) findViewById(R.id.editStory);
-        editText1.setText(Story);
+        editText1.setText(story);
 
         final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
@@ -129,7 +141,7 @@ public class Memory_Page extends AppCompatActivity {
 
                     String item = editText.getText().toString();
                     String item1 = editText1.getText().toString();
-                    if ((!item.equals("") && !item.equals(titleDB)) || bitmap != null || (!item1.equals("") && !item1.equals(titleDB))) {
+                    if ((!item.equals("") && !item.equals(titleDB)) || bitmap != null || (!item1.equals("") && !item1.equals(story))) {
 
                         if ((!item.equals("") && !item.equals(titleDB))) {
                             myDB.updateTitle(item, idDB);
@@ -139,7 +151,7 @@ public class Memory_Page extends AppCompatActivity {
 
                         if ((!item1.equals("") && !item1.equals(titleDB))) {
                             myDB.updateStory(item1, idDB);
-                            Log.i("Update", "title updated to: " + item);
+                            Log.i("Update", "title updated to: " + item1);
                             textView1.setText(item1);
                         }
 

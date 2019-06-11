@@ -140,10 +140,10 @@ public class Create_Memory extends AppCompatActivity {
         }
     }
 
-    public void AddData(String newEntry, String newStory) {
+    public void AddData(String newTitle, String newStory) {
         if(marker != null) {
 
-            int ID = myDB.addMemory(newEntry);
+            int ID = myDB.addMemory(newTitle, newStory);
 
             if (ID == -1) {
                 Toast.makeText(this, "Something went wrong :(", Toast.LENGTH_LONG).show();
@@ -151,9 +151,8 @@ public class Create_Memory extends AppCompatActivity {
             } else {
 
                 myDB.addLocation(marker.getPosition().latitude, marker.getPosition().longitude, ID);
-                myDB.addStory(newStory, ID);
+                Log.i("Adding", newTitle + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
                 Log.i("Adding", newStory);
-                Log.i("Adding", newEntry + " " + marker.getPosition().latitude + " " + marker.getPosition().longitude);
 
                 if (bitmap != null) {
                     String fileName = ID + "-1.jpg";
