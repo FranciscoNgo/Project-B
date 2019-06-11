@@ -258,9 +258,10 @@ public class Memory_Page extends AppCompatActivity {
                     requestStoragePermission();
                 } 
 
-
+                HideButtons();
                 //new share function voor screenshot
                 shareit();
+                ShowButtons();
 
             }
         });
@@ -421,6 +422,18 @@ public class Memory_Page extends AppCompatActivity {
             //Error
 
         }
+    }
+
+    public void HideButtons(){
+        btnDelete.setVisibility(btnDelete.GONE);
+        btnEdit.setVisibility(btnEdit.GONE);
+        btnShare.setVisibility(btnShare.GONE);
+    }
+
+    public void ShowButtons(){
+        btnDelete.setVisibility(btnDelete.VISIBLE);
+        btnEdit.setVisibility(btnEdit.VISIBLE);
+        btnShare.setVisibility(btnShare.VISIBLE);
     }
 
 }
