@@ -102,8 +102,6 @@ public class Memory_Page extends AppCompatActivity {
 
         data.moveToFirst();
         
-        Story = myDB.getStorybyID(idDB);
-        Log.i("Update", Story);
         titleDB = data.getString(1);
         story = data.getString(2);
         latitude = data.getDouble(4);
@@ -405,9 +403,9 @@ public class Memory_Page extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
 
-    public void shareit()
-    {
+    public void shareit(){
         View view =  getWindow().getDecorView().getRootView();
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state))
