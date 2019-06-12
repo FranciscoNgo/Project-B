@@ -1,12 +1,21 @@
 package com.example.project_b;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -34,6 +43,7 @@ public class Memory_Page extends AppCompatActivity {
 
     DatabaseHelper myDB;
 
+    private int STORAGE_PERMISSION_CODE = 1;
     private String titleDB;
     private int idDB;
 
@@ -43,7 +53,7 @@ public class Memory_Page extends AppCompatActivity {
     public boolean editchecker = false;
     //public static boolean deletechecker = false;
 
-    Button btnEdit, btnDelete, btnYes, btnNo;
+    Button btnEdit, btnDelete, btnYes, btnNo,btnShare;
     EditText editText;
 
     TextView emptyImageText;
@@ -54,6 +64,7 @@ public class Memory_Page extends AppCompatActivity {
 
     public String path;
     public String photoName;
+
 
 
 
@@ -90,13 +101,13 @@ public class Memory_Page extends AppCompatActivity {
         Cursor data = myDB.getMemory(idDB);
 
         data.moveToFirst();
-
-
+        
+        Story = myDB.getStorybyID(idDB);
+        Log.i("Update", Story);
         titleDB = data.getString(1);
         story = data.getString(2);
         latitude = data.getDouble(4);
         longitude = data.getDouble(5);
-
         Log.i("Update", story);
 
         if (data.getColumnCount() > 6) {
@@ -130,6 +141,7 @@ public class Memory_Page extends AppCompatActivity {
         btnDelete = (Button) findViewById(R.id.DButton);
         btnYes = (Button) findViewById(R.id.buttonYes);
         btnNo = (Button) findViewById(R.id.buttonNo);
+        btnShare = (Button) findViewById(R.id.SButton);
 
         //ImageView.setOnClickListener(new btnTakePhotoClicker());
 
@@ -201,6 +213,7 @@ public class Memory_Page extends AppCompatActivity {
                     btnEdit.setVisibility(btnEdit.GONE);
                     btnYes.setVisibility(btnYes.VISIBLE);
                     btnNo.setVisibility(btnYes.VISIBLE);
+                    btnShare.setVisibility(btnShare.GONE);
                     editText.setVisibility(editText.GONE);
                     emptyImageText.setVisibility(TextView.GONE);
             }
@@ -216,6 +229,7 @@ public class Memory_Page extends AppCompatActivity {
                 btnEdit.setVisibility(btnEdit.VISIBLE);
                 btnYes.setVisibility(btnYes.GONE);
                 btnNo.setVisibility(btnYes.GONE);
+                btnShare.setVisibility(btnShare.VISIBLE);
                 if (editchecker) {
                     editText.setVisibility(editText.VISIBLE);
                     if (bitmap == null) {
@@ -247,8 +261,60 @@ public class Memory_Page extends AppCompatActivity {
             }
         });
 
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Button vraagt WRITE_EXTERNAL_STORAGE permission aan
+                if (ContextCompat.checkSelfPermission(Memory_Page.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    requestStoragePermission();
+                } 
+
+                HideButtons();
+                //new share function voor screenshot
+                shareit();
+                ShowButtons();
+
+            }
+        });
+
+    }
+    //requestStoragePermission aanmaken
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed for to access external programs")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(Memory_Page.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     //Methode om een image te uploaden uit de internal storage.
     //Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
 
@@ -339,6 +405,68 @@ public class Memory_Page extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
+    public void shareit()
+    {
+        View view =  getWindow().getDecorView().getRootView();
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state))
+        {
+            File picDir  = new File(Environment.getExternalStorageDirectory()+ "/myPic");
+            if (!picDir.exists())
+            {
+                picDir.mkdir();
+            }
+            view.setDrawingCacheEnabled(true);
+            view.buildDrawingCache(true);
+            Bitmap bitmap = view.getDrawingCache();
+//          Date date = new Date();
+            String fileName = "Screenshot" + ".jpg";
+            File picFile = new File(picDir + "/" + fileName);
+            try
+            {
+                picFile.createNewFile();
+                FileOutputStream picOut = new FileOutputStream(picFile);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), (int)(bitmap.getHeight()/1.2));
+                boolean saved = bitmap.compress(Bitmap.CompressFormat.JPEG, 100, picOut);
+                if (saved)
+                {
+                    Toast.makeText(getApplicationContext(), "Image saved to your device Pictures "+ "directory!", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    Toast.makeText(getApplicationContext(), "error saving", Toast.LENGTH_SHORT).show();
+                }
+                picOut.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            view.destroyDrawingCache();
+
+            // share via intent
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("image/jpeg");
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(picFile.getAbsolutePath()));
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+
+        } else {
+            //Error
+
+        }
+    }
+
+    public void HideButtons(){
+        btnDelete.setVisibility(btnDelete.GONE);
+        btnEdit.setVisibility(btnEdit.GONE);
+        btnShare.setVisibility(btnShare.GONE);
+    }
+
+    public void ShowButtons(){
+        btnDelete.setVisibility(btnDelete.VISIBLE);
+        btnEdit.setVisibility(btnEdit.VISIBLE);
+        btnShare.setVisibility(btnShare.VISIBLE);
     }
 
 }
