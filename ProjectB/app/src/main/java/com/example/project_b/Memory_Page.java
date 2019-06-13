@@ -174,6 +174,8 @@ public class Memory_Page extends AppCompatActivity {
 
                             Log.i("Update", "photo updated");
                         }
+
+                        Toast.makeText(Memory_Page.this, "Saved!", Toast.LENGTH_LONG).show();
                     }
 
                     if (emptyImageText.getVisibility() == TextView.VISIBLE) {
@@ -366,7 +368,7 @@ public class Memory_Page extends AppCompatActivity {
 
     public void deletedActivity() {
         finish();
-        Toast.makeText(getApplicationContext(), "Memory deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Deleted!", Toast.LENGTH_SHORT).show();
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
@@ -440,10 +442,10 @@ public class Memory_Page extends AppCompatActivity {
                 boolean saved = bitmap.compress(Bitmap.CompressFormat.JPEG, 100, picOut);
                 if (saved)
                 {
-                    Toast.makeText(getApplicationContext(), "Image saved to your device Pictures "+ "directory!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Image is saved in your gallery!", Toast.LENGTH_SHORT).show();
                 } else
                 {
-                    Toast.makeText(getApplicationContext(), "error saving", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error while saving image", Toast.LENGTH_SHORT).show();
                 }
                 picOut.close();
             }
