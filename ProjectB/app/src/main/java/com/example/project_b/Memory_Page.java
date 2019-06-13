@@ -179,6 +179,8 @@ public class Memory_Page extends AppCompatActivity {
                     if (emptyImageText.getVisibility() == TextView.VISIBLE) {
                         emptyImageText.setVisibility(TextView.GONE);
                     }
+
+                    toolbar_text.setText("EDIT MODE");
                     textView.setVisibility(textView.VISIBLE);
                     textView1.setVisibility(textView.VISIBLE);
                     editText.setVisibility(editText.GONE);
@@ -194,6 +196,7 @@ public class Memory_Page extends AppCompatActivity {
                     if (path == null) {
                         emptyImageText.setVisibility(TextView.VISIBLE);
                     }
+                    toolbar_text.setText("EDIT MODE");
                     textView.setVisibility(textView.GONE);
                     textView1.setVisibility(textView1.GONE);
                     editText.setVisibility(editText.VISIBLE);
