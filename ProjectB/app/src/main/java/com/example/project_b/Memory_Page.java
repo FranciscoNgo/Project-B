@@ -180,7 +180,7 @@ public class Memory_Page extends AppCompatActivity {
                         emptyImageText.setVisibility(TextView.GONE);
                     }
 
-                    toolbar_text.setText("EDIT MODE");
+                    toolbar_text.setText("Your Memory");
                     textView.setVisibility(textView.VISIBLE);
                     textView1.setVisibility(textView.VISIBLE);
                     editText.setVisibility(editText.GONE);
