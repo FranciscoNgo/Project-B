@@ -196,7 +196,7 @@ public class Memory_Page extends AppCompatActivity {
                     if (path == null) {
                         emptyImageText.setVisibility(TextView.VISIBLE);
                     }
-                    toolbar_text.setText("EDIT MODE");
+                    toolbar_text.setText("Edit Mode");
                     textView.setVisibility(textView.GONE);
                     textView1.setVisibility(textView1.GONE);
                     editText.setVisibility(editText.VISIBLE);
@@ -366,7 +366,7 @@ public class Memory_Page extends AppCompatActivity {
 
     public void deletedActivity() {
         finish();
-        Toast.makeText(getApplicationContext(), "Memory deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Memory deleted", Toast.LENGTH_SHORT).show();
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName){

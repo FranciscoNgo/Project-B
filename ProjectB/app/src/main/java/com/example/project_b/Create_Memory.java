@@ -165,7 +165,7 @@ public class Create_Memory extends AppCompatActivity {
                 }
 
                 editText.setText("");
-                Toast.makeText(this, "Story is saved!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Saved!", Toast.LENGTH_LONG).show();
 
                 this.finish();
             }
