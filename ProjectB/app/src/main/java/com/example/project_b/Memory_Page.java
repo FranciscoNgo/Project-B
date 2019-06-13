@@ -64,10 +64,7 @@ public class Memory_Page extends AppCompatActivity {
 
     public String path;
     public String photoName;
-
-
-
-
+    
     ImageView ImageView;
 
     private static final int CAM_REQUEST = 1888;
@@ -119,19 +116,19 @@ public class Memory_Page extends AppCompatActivity {
             photoName = idDB + "-1.jpg";
         }
 
-        final TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(titleDB);
+        final TextView titleView = (TextView) findViewById(R.id.textView);
+        titleView.setText(titleDB);
 
-        final TextView textView1 = (TextView) findViewById(R.id.storyView);
-        textView1.setText(story);
+        final TextView storyView = (TextView) findViewById(R.id.storyView);
+        storyView.setText(story);
 
         final TextView DeleteText = (TextView) findViewById(R.id.DeleteText);
 
-        final EditText editText = (EditText) findViewById(R.id.EditText);
-        editText.setText(titleDB);
+        final EditText titleEdit = (EditText) findViewById(R.id.EditText);
+        titleEdit.setText(titleDB);
 
-        final EditText editText1 = (EditText) findViewById(R.id.editStory);
-        editText1.setText(story);
+        final EditText storyEdit = (EditText) findViewById(R.id.editStory);
+        storyEdit.setText(story);
 
         final ImageView ImageView = (ImageView) findViewById(R.id.ImageView);
 
@@ -149,20 +146,20 @@ public class Memory_Page extends AppCompatActivity {
                 if (editchecker) {
 
 
-                    String item = editText.getText().toString();
-                    String item1 = editText1.getText().toString();
+                    String item = titleEdit.getText().toString();
+                    String item1 = storyEdit.getText().toString();
                     if ((!item.equals("") && !item.equals(titleDB)) || bitmap != null || (!item1.equals("") && !item1.equals(story))) {
 
                         if ((!item.equals("") && !item.equals(titleDB))) {
                             myDB.updateTitle(item, idDB);
                             Log.i("Update", "title updated to: " + item);
-                            textView.setText(item);
+                            titleView.setText(item);
                         }
 
                         if ((!item1.equals("") && !item1.equals(titleDB))) {
                             myDB.updateStory(item1, idDB);
                             Log.i("Update", "title updated to: " + item1);
-                            textView1.setText(item1);
+                            storyView.setText(item1);
                         }
 
                         if (bitmap != null) {
@@ -183,10 +180,10 @@ public class Memory_Page extends AppCompatActivity {
                     }
 
                     toolbar_text.setText("Your Memory");
-                    textView.setVisibility(textView.VISIBLE);
-                    textView1.setVisibility(textView.VISIBLE);
-                    editText.setVisibility(editText.GONE);
-                    editText1.setVisibility(editText.GONE);
+                    titleView.setVisibility(titleView.VISIBLE);
+                    storyView.setVisibility(titleView.VISIBLE);
+                    titleEdit.setVisibility(titleEdit.GONE);
+                    storyEdit.setVisibility(titleEdit.GONE);
 
                     btnDelete.setVisibility(btnDelete.VISIBLE);
                     btnShare.setVisibility(btnShare.VISIBLE);
@@ -199,10 +196,10 @@ public class Memory_Page extends AppCompatActivity {
                         emptyImageText.setVisibility(TextView.VISIBLE);
                     }
                     toolbar_text.setText("Edit Mode");
-                    textView.setVisibility(textView.GONE);
-                    textView1.setVisibility(textView1.GONE);
-                    editText.setVisibility(editText.VISIBLE);
-                    editText1.setVisibility(editText.VISIBLE);
+                    titleView.setVisibility(titleView.GONE);
+                    storyView.setVisibility(storyView.GONE);
+                    titleEdit.setVisibility(titleEdit.VISIBLE);
+                    storyEdit.setVisibility(titleEdit.VISIBLE);
 
                     btnDelete.setVisibility(btnDelete.GONE);
                     btnShare.setVisibility(btnShare.GONE);
@@ -216,8 +213,8 @@ public class Memory_Page extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    textView.setVisibility(textView.GONE);
-                    textView1.setVisibility(textView.GONE);
+                    titleView.setVisibility(titleView.GONE);
+                    storyView.setVisibility(titleView.GONE);
                     ImageView.setVisibility(ImageView.GONE);
                     DeleteText.setVisibility(DeleteText.VISIBLE);
                     btnDelete.setVisibility(btnDelete.GONE);
@@ -225,7 +222,7 @@ public class Memory_Page extends AppCompatActivity {
                     btnYes.setVisibility(btnYes.VISIBLE);
                     btnNo.setVisibility(btnYes.VISIBLE);
                     btnShare.setVisibility(btnShare.GONE);
-                    editText.setVisibility(editText.GONE);
+                    titleEdit.setVisibility(titleEdit.GONE);
                     emptyImageText.setVisibility(TextView.GONE);
             }
         });
@@ -234,7 +231,7 @@ public class Memory_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageView.setVisibility(ImageView.VISIBLE);
-                textView1.setVisibility(textView.VISIBLE);
+                storyView.setVisibility(titleView.VISIBLE);
                 DeleteText.setVisibility(DeleteText.GONE);
                 btnDelete.setVisibility(btnDelete.VISIBLE);
                 btnEdit.setVisibility(btnEdit.VISIBLE);
@@ -242,13 +239,13 @@ public class Memory_Page extends AppCompatActivity {
                 btnNo.setVisibility(btnYes.GONE);
                 btnShare.setVisibility(btnShare.VISIBLE);
                 if (editchecker) {
-                    editText.setVisibility(editText.VISIBLE);
+                    titleEdit.setVisibility(titleEdit.VISIBLE);
                     if (bitmap == null) {
                         emptyImageText.setVisibility(TextView.VISIBLE);
                     }
                 }
                 else {
-                    textView.setVisibility(textView.VISIBLE);
+                    titleView.setVisibility(titleView.VISIBLE);
                 }
 
             }
@@ -468,12 +465,14 @@ public class Memory_Page extends AppCompatActivity {
         }
     }
 
+    //Hides the buttons btnDelete, btnEdit, btnShare.
     public void HideButtons(){
         btnDelete.setVisibility(btnDelete.GONE);
         btnEdit.setVisibility(btnEdit.GONE);
         btnShare.setVisibility(btnShare.GONE);
     }
 
+    //Shows the buttons btnDelete, btnEdit, btnShare.
     public void ShowButtons(){
         btnDelete.setVisibility(btnDelete.VISIBLE);
         btnEdit.setVisibility(btnEdit.VISIBLE);
