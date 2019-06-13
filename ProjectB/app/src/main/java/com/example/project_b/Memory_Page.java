@@ -183,6 +183,10 @@ public class Memory_Page extends AppCompatActivity {
                     textView1.setVisibility(textView.VISIBLE);
                     editText.setVisibility(editText.GONE);
                     editText1.setVisibility(editText.GONE);
+
+                    btnDelete.setVisibility(btnDelete.VISIBLE);
+                    btnShare.setVisibility(btnShare.VISIBLE);
+
                     btnEdit.setText("Edit");
 
                 }
@@ -194,6 +198,10 @@ public class Memory_Page extends AppCompatActivity {
                     textView1.setVisibility(textView1.GONE);
                     editText.setVisibility(editText.VISIBLE);
                     editText1.setVisibility(editText.VISIBLE);
+
+                    btnDelete.setVisibility(btnDelete.GONE);
+                    btnShare.setVisibility(btnShare.GONE);
+
                     btnEdit.setText("Save");
                 }
                 editchecker = !editchecker;
