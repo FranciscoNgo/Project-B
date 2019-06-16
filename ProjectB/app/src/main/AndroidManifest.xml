@@ -23,9 +23,6 @@
         <activity android:name=".Maps" />
         <activity android:name=".Settings" />
         <activity android:name=".Pick_Location" />
-        <activity android:name=".Memory_Filter_Sorter" />
-        <activity android:name=".Memory_Displayer" />
-        <activity android:name=".Map_Filter" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +38,6 @@
         <activity
             android:name=".Map"
             android:label="@string/title_activity_map" />
-        <activity android:name=".Edit_Memory" />
         <activity android:name=".Create_Memory" />
         <activity android:name=".Collections" />
         <activity android:name=".MainActivity">

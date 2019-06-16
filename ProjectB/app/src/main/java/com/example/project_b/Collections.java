@@ -127,17 +127,4 @@ public class Collections extends AppCompatActivity {
     }
 
 
-    public void buttonClicked(View v) {
-
-        if (v.getId() == R.id.buttonMemory_Displayer) {
-            openMemory_Displayer();
-        }
-    }
-
-    public void openMemory_Displayer() {
-        Intent intent = new Intent(this, Memory_Displayer.class);
-        startActivity(intent);
-    }
-
-
 }

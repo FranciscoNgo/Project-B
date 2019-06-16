@@ -174,16 +174,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buttonClicked(View v) {
 
-        if (v.getId() == R.id.buttonMap_Filter) {
-            openMap_Filter();
-        }
-    }
 
-    public void openMap_Filter() {
-        Intent intent = new Intent(this, Map_Filter.class);
-        startActivity(intent);
-    }
 
 }
