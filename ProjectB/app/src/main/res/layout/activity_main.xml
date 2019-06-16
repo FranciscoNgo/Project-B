@@ -78,7 +78,7 @@
         android:backgroundTint="#76D7C4  "
         android:fontFamily="@font/coffeetea"
         android:onClick="buttonClicked"
-        android:text="Settings"
+        android:text="Help"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
