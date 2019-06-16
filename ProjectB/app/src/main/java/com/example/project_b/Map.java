@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,6 +31,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     public ArrayList<Marker> markerList;
     public ArrayList<Integer> IDList;
+
+    private boolean start = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,11 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(rotterdam));
 
         refreshMarkers();
+
+        if (markerList.size() != 0 && !start) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerList.get(markerList.size() - 1).getPosition(), 14));
+            start = true;
+        }
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
