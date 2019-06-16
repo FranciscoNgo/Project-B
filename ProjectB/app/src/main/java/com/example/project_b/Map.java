@@ -75,11 +75,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         refreshMarkers();
 
+        // Zorgt ervoor dat de camera op de laatste gemaakte marker zoomt.
         if (markerList.size() != 0 && !start) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerList.get(markerList.size() - 1).getPosition(), 14));
             start = true;
         }
 
+        // Methode voor als je op een marker klikt.
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -122,6 +124,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+    // Refreshmarker methode.
     public void refreshMarkers() {
 
         Log.i("Calling", "RefreshMarkers");

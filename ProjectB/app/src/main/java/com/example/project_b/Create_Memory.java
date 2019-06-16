@@ -47,9 +47,10 @@ public class Create_Memory extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-        // picture items
+
+        // Laat gemaakte foto in ImageView zien.
         imgTakenPic = (ImageView)findViewById(R.id.rpick);
-        //imgTakenPic.setOnClickListener(new btnTakePhotoClicker());
+
 
         editText = (EditText) findViewById(R.id.editText);
         editStory = (EditText) findViewById(R.id.editStory);
@@ -59,6 +60,8 @@ public class Create_Memory extends AppCompatActivity {
         btnpic.setOnClickListener(new btnTakePhotoClicker());
 
 
+        // Checkt of er iets is geschreven in het titel vak en
+        // het story vak. Zo niet, dan geeft het een ToastMessage.
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +143,8 @@ public class Create_Memory extends AppCompatActivity {
         }
     }
 
+
+    // Voegt alle data toe aan de database. Title, story, foto en longitude and latitude van de marker.
     public void AddData(String newTitle, String newStory) {
         if(marker != null) {
 
@@ -176,6 +181,7 @@ public class Create_Memory extends AppCompatActivity {
         }
     }
 
+    // Stuurt je door naar Pick_Location om de locatie uit de kiezen.
     public void openPick_Location() {
         Intent intent = new Intent(this, Pick_Location.class);
 
@@ -191,6 +197,9 @@ public class Create_Memory extends AppCompatActivity {
     }
 
 
+    // Foto wordt opgeslagen in Internal Storage. Hij returnt de absolute.path die
+    // je kan opslaan in de database. Met loadImagefromStorage kan je met de filename + path de foto
+    // laden met een bitmap (+imageview).
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
@@ -217,7 +226,7 @@ public class Create_Memory extends AppCompatActivity {
 
     }
 
- //Methode om een image te te loaden uit de internal storage.
+    //Methode om een image te te loaden uit de internal storage.
     // Geef als argument de path. Hij load hem dan via een ImageView . R.id."..." is die naam van de imageview
 
     private void loadImageFromStorage(String path, String fileName)
