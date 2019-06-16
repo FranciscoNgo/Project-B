@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Memory_Page"></activity>
         <activity android:name=".Maps" />
+        <activity android:name=".Settings" />
         <activity android:name=".Pick_Location" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

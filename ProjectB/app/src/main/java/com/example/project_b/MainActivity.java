@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             openMap();
         } else if (v.getId() == R.id.buttonCollections) {
             openCollections();
+        } else if (v.getId() == R.id.buttonSettings) {
+            openSettings();
         } else if (v.getId() == R.id.buttonCreate_Memory) {
             openCreate_Memory();
         }
@@ -84,8 +86,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
+    public void openSettings() {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
 
     // Methode die je naar Create Memory brengt.
     public void openCreate_Memory() {
