@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    // Methode die checkt of er op een button is geklikt.
     public void buttonClicked(View v) {
 
         if (v.getId() == R.id.buttonMap) {
@@ -72,11 +74,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Methode die je naar Maps brengt.
     public void openMap() {
         Intent intent = new Intent(this, Map.class);
         startActivity(intent);
     }
 
+    // Methode die je naar Collections brengt.
     public void openCollections() {
         Intent intent = new Intent(this, Collections.class);
         startActivity(intent);
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Methode die je naar Create Memory brengt.
     public void openCreate_Memory() {
         Intent intent = new Intent(this, Create_Memory.class);
         startActivity(intent);

@@ -72,6 +72,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         refreshMarkers();
 
+        // Methode voor als je op een marker klikt.
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -114,6 +115,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+    // Refreshmarker methode.
     public void refreshMarkers() {
 
         Log.i("Calling", "RefreshMarkers");
