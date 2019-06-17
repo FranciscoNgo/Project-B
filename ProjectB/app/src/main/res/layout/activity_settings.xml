@@ -33,7 +33,7 @@
         android:layout_width="407dp"
         android:layout_height="236dp"
         android:layout_marginStart="4dp"
-        android:text='Welcome and thanks for using our app!                  \To create a memory go to". Make a title, story and pick a location. Picture is optional and can always be added later. Press "Save" to save the memory.                                                               To view the memory you can go to "Maps" and find the marker connected with the memory. Click on the marker and click on the title to go to the memory. You can also view your memory by clicking on the title in "Collections". In this page it is also possible to edit or delete your Memory.                     Have fun using our app!'
+        android:text='Welcome and thanks for using our app!                  \To create a memory go to". Make a title, story and pick a location. Picture is optional and can always be added later. Press "Save" to save the memory. To view the memory you can go to "Maps" and find the marker connected with the memory. Click on the marker and click on the title to go to the memory. You can also view your memory by clicking on the title in "Collections". In this page it is also possible to edit or delete your Memory. Have fun using our app!'
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
