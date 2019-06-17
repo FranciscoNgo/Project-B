@@ -11,7 +11,7 @@
         layout="@layout/toolbar" />
 
     <EditText
-        android:layout_width="match_parentp"
+        android:layout_width="match_parent"
         android:layout_height="500dp"
         android:editable="false"
         android:text="dasdasdadsd. asdasdsadsdsadasdssad. asdsadasdasdasda. asdasdasdasd.asdasdasdasd.asdadad"
