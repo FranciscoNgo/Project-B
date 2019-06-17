@@ -27,7 +27,7 @@ public class Settings extends AppCompatActivity {
 
         final TextView toolbar_text = findViewById(R.id.toolbar_text);
 
-        toolbar_text.setText("Settings");
+        toolbar_text.setText("Help");
 
 
 
