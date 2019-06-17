@@ -8,16 +8,39 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
 
-    <EditText
-        android:id="@+id/permEditText"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:editable="false"
-        android:text="dasdasdadsd. asdasdsadsdsadasdssad. asdsadasdasdasda. asdasdasdasd.asdasdasdasd.asdadad"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="284dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="User manual"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="User manual" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="407dp"
+        android:layout_height="236dp"
+        android:layout_marginStart="4dp"
+        android:text='Welcome and thanks for using our app!                  \To create a memory go to". Make a title, story and pick a location. Picture is optional and can always be added later. Press "Save" to save the memory.                                                               To view the memory you can go to "Maps" and find the marker connected with the memory. Click on the marker and click on the title to go to the memory. You can also view your memory by clicking on the title in "Collections". In this page it is also possible to edit or delete your Memory.                     Have fun using our app!'
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="469dp" />
 
 </android.support.constraint.ConstraintLayout>
